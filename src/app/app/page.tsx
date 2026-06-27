@@ -41,7 +41,7 @@ export default async function DashboardPage() {
     supabase.from('quick_notes').select('*')
       .order('is_pinned', { ascending: false }).order('created_at', { ascending: false }).limit(4),
     supabase.from('clients').select('*').order('name'),
-    supabase.from('projects').select('id, name').order('name'),
+    supabase.from('projects').select('*').order('name'),
     supabase.from('profiles').select('full_name').eq('id', user.id).single(),
   ])
 
