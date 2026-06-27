@@ -1,0 +1,120 @@
+'use client'
+
+import { useState, useTransition } from 'react'
+import { MoreHorizontal, Pencil, Trash2, CalendarDays, Clock } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { Checkbox } from '@/components/ui/checkbox'
+import {
+  DropdownMenu, DropdownMenuContent, DropdownMenuItem,
+  DropdownMenuSeparator, DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { ConfirmDeleteDialog } from '@/components/shared/ConfirmDeleteDialog'
+import { toggleTaskStatus, deleteTask } from '@/actions/tasks'
+import { cn, formatDate, TASK_PRIORITY_LABELS } from '@/lib/utils'
+import type { Task } from '@/types'
+
+const priorityVariants = {
+  low: 'low' as const,
+  medium: 'medium' as const,
+  high: 'high' as const,
+}
+
+interface TaskCardProps {
+  task: Task
+  onEdit?: (task: Task) => void
+}
+
+export function TaskCard({ task, onEdit }: TaskCardProps) {
+  const [deleteOpen, setDeleteOpen] = useState(false)
+  const [isPending, startTransition] = useTransition()
+
+  const completed = task.status === 'completed'
+
+  function handleToggle(checked: boolean) {
+    startTransition(() => {
+      toggleTaskStatus(task.id, checked)
+    })
+  }
+
+  async function handleDelete() {
+    await deleteTask(task.id)
+  }
+
+  return (
+    <>
+      <div className={cn(
+        'group flex items-start gap-3 p-3.5 rounded-xl border bg-card transition-all duration-150 hover:shadow-sm',
+        completed && 'opacity-60',
+        isPending && 'opacity-50 pointer-events-none'
+      )}>
+        <Checkbox
+          checked={completed}
+          onCheckedChange={handleToggle}
+          className="mt-0.5 shrink-0"
+          aria-label="Marcar como concluída"
+        />
+
+        <div className="flex-1 min-w-0">
+          <p className={cn('text-sm font-medium leading-snug', completed && 'line-through text-muted-foreground')}>
+            {task.title}
+          </p>
+          {task.description && (
+            <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">{task.description}</p>
+          )}
+          <div className="flex items-center gap-2 mt-2 flex-wrap">
+            <Badge variant={priorityVariants[task.priority]} className="text-[10px]">
+              {TASK_PRIORITY_LABELS[task.priority]}
+            </Badge>
+            {task.due_date && (
+              <span className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                <CalendarDays className="h-3 w-3" />
+                {formatDate(task.due_date)}
+              </span>
+            )}
+            {task.due_time && (
+              <span className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                <Clock className="h-3 w-3" />
+                {task.due_time.slice(0, 5)}
+              </span>
+            )}
+            {task.project && (
+              <span className="text-[10px] text-muted-foreground truncate max-w-[100px]">
+                {task.project.name}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="opacity-0 group-hover:opacity-100 focus:opacity-100 p-1 rounded-md hover:bg-muted transition-all shrink-0">
+              <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-40">
+            {onEdit && (
+              <DropdownMenuItem onClick={() => onEdit(task)}>
+                <Pencil className="h-4 w-4" /> Editar
+              </DropdownMenuItem>
+            )}
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              className="text-destructive focus:text-destructive"
+              onClick={() => setDeleteOpen(true)}
+            >
+              <Trash2 className="h-4 w-4" /> Excluir
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      <ConfirmDeleteDialog
+        open={deleteOpen}
+        onOpenChange={setDeleteOpen}
+        title="Excluir tarefa"
+        description={`Tem certeza que deseja excluir "${task.title}"?`}
+        onConfirm={handleDelete}
+      />
+    </>
+  )
+}

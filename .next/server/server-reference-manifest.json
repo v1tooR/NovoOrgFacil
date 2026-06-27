@@ -1,0 +1,242 @@
+{
+  "node": {
+    "2dbedd5ea362e416123b6ca897bd76c16052895e": {
+      "workers": {
+        "app/(auth)/login/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/(auth)/register/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/tarefas/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/projetos/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cclients.ts%22%2C%5B%22updateClient%22%2C%22deleteClient%22%2C%22createClient_%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/financeiro/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/(auth)/login/page": "action-browser",
+        "app/(auth)/register/page": "action-browser",
+        "app/app/page": "action-browser",
+        "app/app/tarefas/page": "action-browser",
+        "app/app/projetos/page": "action-browser",
+        "app/app/clientes/page": "action-browser",
+        "app/app/financeiro/page": "action-browser"
+      }
+    },
+    "30446bb1d36321d5f682dec211eb71f30fff5e43": {
+      "workers": {
+        "app/(auth)/login/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/(auth)/register/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/tarefas/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/projetos/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cclients.ts%22%2C%5B%22updateClient%22%2C%22deleteClient%22%2C%22createClient_%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/financeiro/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/(auth)/login/page": "action-browser",
+        "app/(auth)/register/page": "action-browser",
+        "app/app/page": "action-browser",
+        "app/app/tarefas/page": "action-browser",
+        "app/app/projetos/page": "action-browser",
+        "app/app/clientes/page": "action-browser",
+        "app/app/financeiro/page": "action-browser"
+      }
+    },
+    "58acf2b59be014cca8ea4e90d52954abefd050d0": {
+      "workers": {
+        "app/(auth)/login/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/(auth)/register/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/tarefas/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/projetos/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cclients.ts%22%2C%5B%22updateClient%22%2C%22deleteClient%22%2C%22createClient_%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/financeiro/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/(auth)/login/page": "action-browser",
+        "app/(auth)/register/page": "action-browser",
+        "app/app/page": "action-browser",
+        "app/app/tarefas/page": "action-browser",
+        "app/app/projetos/page": "action-browser",
+        "app/app/clientes/page": "action-browser",
+        "app/app/financeiro/page": "action-browser"
+      }
+    },
+    "5de4e65392511bc8ccfcab2b787bd401a87f13b7": {
+      "workers": {
+        "app/(auth)/login/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/(auth)/register/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/tarefas/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/projetos/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cclients.ts%22%2C%5B%22updateClient%22%2C%22deleteClient%22%2C%22createClient_%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/financeiro/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/(auth)/login/page": "action-browser",
+        "app/(auth)/register/page": "action-browser",
+        "app/app/page": "action-browser",
+        "app/app/tarefas/page": "action-browser",
+        "app/app/projetos/page": "action-browser",
+        "app/app/clientes/page": "action-browser",
+        "app/app/financeiro/page": "action-browser"
+      }
+    },
+    "53d8fac09cbb27482df6234aae445acecfed191e": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/financeiro/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser",
+        "app/app/financeiro/page": "action-browser"
+      }
+    },
+    "cb83e2f5ec822ccc5f899cc183474abefe478914": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/financeiro/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser",
+        "app/app/financeiro/page": "action-browser"
+      }
+    },
+    "cff859e7d6e800558b66adf7b40bec445a79780d": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/financeiro/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser",
+        "app/app/financeiro/page": "action-browser"
+      }
+    },
+    "04450426528145c05fb0b59496640f4abf95376a": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser"
+      }
+    },
+    "26675ce71c896b9c43d658904ce0d456921da679": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser"
+      }
+    },
+    "969446090464be8cbcdaf79c1d99e2a561899255": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser"
+      }
+    },
+    "cfe16d99a43021e0c2f999977f6b83b23d9ce957": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser"
+      }
+    },
+    "906670f8b10498bc3adc732cd3fb7e81c3585a27": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/projetos/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser",
+        "app/app/projetos/page": "action-browser"
+      }
+    },
+    "94f33f2cd691ce2be002117d6eda4169fbbfdafc": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/projetos/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser",
+        "app/app/projetos/page": "action-browser"
+      }
+    },
+    "9b8ebe842de74c603186e680d49d433b9329ccbc": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/projetos/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser",
+        "app/app/projetos/page": "action-browser"
+      }
+    },
+    "3b3a8fc71c6ce1fc11549c14d96a68e1759a8657": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/tarefas/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser",
+        "app/app/tarefas/page": "action-browser"
+      }
+    },
+    "3f2f7f845c69f898fe0e91e8626108f76de37773": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/tarefas/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser",
+        "app/app/tarefas/page": "action-browser"
+      }
+    },
+    "9738a36da484e20432cdcc737f36dfc679175bd2": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/tarefas/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser",
+        "app/app/tarefas/page": "action-browser"
+      }
+    },
+    "ee109159e79994be1da089da7ccbacc5e5b203ff": {
+      "workers": {
+        "app/app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cfinance.ts%22%2C%5B%22createFinancialEntry%22%2C%22deleteFinancialEntry%22%2C%22updateFinancialEntry%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cnotes.ts%22%2C%5B%22createNote%22%2C%22updateNote%22%2C%22deleteNote%22%2C%22toggleNotePin%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cprojects.ts%22%2C%5B%22updateProject%22%2C%22deleteProject%22%2C%22createProject%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!",
+        "app/app/tarefas/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Ctasks.ts%22%2C%5B%22createTask%22%2C%22toggleTaskStatus%22%2C%22deleteTask%22%2C%22updateTask%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/page": "action-browser",
+        "app/app/tarefas/page": "action-browser"
+      }
+    },
+    "b87cccf605c81aebb2d8ef851a11226cf3c8e819": {
+      "workers": {
+        "app/app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cclients.ts%22%2C%5B%22updateClient%22%2C%22deleteClient%22%2C%22createClient_%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/clientes/page": "action-browser"
+      }
+    },
+    "bb399f7124ac86f750bdf681f825d6ec3b2cb2bc": {
+      "workers": {
+        "app/app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cclients.ts%22%2C%5B%22updateClient%22%2C%22deleteClient%22%2C%22createClient_%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/clientes/page": "action-browser"
+      }
+    },
+    "de76dd33349d1cde5cae4edd55e66cbf8ee7260a": {
+      "workers": {
+        "app/app/clientes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cclients.ts%22%2C%5B%22updateClient%22%2C%22deleteClient%22%2C%22createClient_%22%5D%5D%2C%5B%22C%3A%5C%5CUsers%5C%5CUsuario%5C%5CNovoOrgFacil%5C%5Csrc%5C%5Cactions%5C%5Cauth.ts%22%2C%5B%22logout%22%2C%22forgotPassword%22%2C%22login%22%2C%22register%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/app/clientes/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "2W/IzxXPq1L3ha6TFTmPccKI9Aag3gasxqFvEfDz46A="
+}
