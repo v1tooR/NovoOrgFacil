@@ -1,80 +1,117 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2, Eye, EyeOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { registerSchema, type RegisterInput } from '@/lib/validations/auth'
-import { register } from '@/actions/auth'
+import { resetPasswordSchema, type ResetPasswordInput } from '@/lib/validations/auth'
+import { updatePassword } from '@/actions/auth'
+import { createClient } from '@/lib/supabase/client'
 
-export default function RegisterPage() {
+type SessionState = 'checking' | 'ready' | 'invalid'
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex flex-col items-center gap-3 py-12 text-muted-foreground animate-fade-in">
+          <Loader2 className="h-6 w-6 animate-spin" />
+        </div>
+      }
+    >
+      <ResetPasswordForm />
+    </Suspense>
+  )
+}
+
+function ResetPasswordForm() {
+  const searchParams = useSearchParams()
+  const [sessionState, setSessionState] = useState<SessionState>('checking')
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
 
-  const form = useForm<RegisterInput>({
-    resolver: zodResolver(registerSchema),
-    defaultValues: { full_name: '', email: '', password: '', confirm_password: '' },
+  const form = useForm<ResetPasswordInput>({
+    resolver: zodResolver(resetPasswordSchema),
+    defaultValues: { password: '', confirm_password: '' },
   })
 
-  async function onSubmit(data: RegisterInput) {
+  useEffect(() => {
+    const supabase = createClient()
+
+    async function establishSession() {
+      const code = searchParams.get('code')
+      if (code) {
+        const { error } = await supabase.auth.exchangeCodeForSession(code)
+        if (error) {
+          setSessionState('invalid')
+          return
+        }
+      }
+
+      const { data: { session } } = await supabase.auth.getSession()
+      setSessionState(session ? 'ready' : 'invalid')
+    }
+
+    establishSession()
+  }, [searchParams])
+
+  async function onSubmit(data: ResetPasswordInput) {
     setError(null)
-    const result = await register(data)
+    const result = await updatePassword(data)
     if (result?.error) setError(result.error)
+  }
+
+  if (sessionState === 'checking') {
+    return (
+      <div className="flex flex-col items-center gap-3 py-12 text-muted-foreground animate-fade-in">
+        <Loader2 className="h-6 w-6 animate-spin" />
+        <p className="text-sm">Verificando link de recuperação...</p>
+      </div>
+    )
+  }
+
+  if (sessionState === 'invalid') {
+    return (
+      <div className="space-y-6 text-center animate-fade-in">
+        <div className="space-y-2">
+          <h1 className="text-2xl font-bold tracking-tight">Link inválido ou expirado</h1>
+          <p className="text-sm text-muted-foreground">
+            Solicite um novo link de recuperação de senha.
+          </p>
+        </div>
+        <Link href="/forgot-password">
+          <Button variant="outline" className="w-full">Solicitar novo link</Button>
+        </Link>
+      </div>
+    )
   }
 
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="space-y-1.5">
-        <h1 className="text-2xl font-bold tracking-tight">Crie sua conta</h1>
-        <p className="text-sm text-muted-foreground">Comece a organizar sua rotina gratuitamente.</p>
+        <h1 className="text-2xl font-bold tracking-tight">Defina sua nova senha</h1>
+        <p className="text-sm text-muted-foreground">Escolha uma senha forte para sua conta.</p>
       </div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
-            name="full_name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nome completo</FormLabel>
-                <FormControl>
-                  <Input placeholder="Seu nome" className="h-10" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>E-mail</FormLabel>
-                <FormControl>
-                  <Input type="email" placeholder="seu@email.com" className="h-10" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Senha</FormLabel>
+                <FormLabel>Nova senha</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
                       type={showPassword ? 'text' : 'password'}
-                      placeholder="Mínimo 8 caracteres, com letra e número"
+                      placeholder="Mínimo 8 caracteres"
                       className="h-10 pr-10"
                       {...field}
                     />
@@ -98,7 +135,7 @@ export default function RegisterPage() {
             name="confirm_password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Confirmar senha</FormLabel>
+                <FormLabel>Confirmar nova senha</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -130,23 +167,13 @@ export default function RegisterPage() {
 
           <Button type="submit" className="w-full h-10" disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" />
-                Criando conta...
-              </>
+              <><Loader2 className="h-4 w-4 animate-spin" /> Salvando...</>
             ) : (
-              'Criar conta'
+              'Redefinir senha'
             )}
           </Button>
         </form>
       </Form>
-
-      <p className="text-center text-sm text-muted-foreground">
-        Já tem conta?{' '}
-        <Link href="/login" className="text-primary font-medium hover:underline">
-          Fazer login
-        </Link>
-      </p>
     </div>
   )
 }

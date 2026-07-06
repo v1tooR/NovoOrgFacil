@@ -3,8 +3,8 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
-import { loginSchema, registerSchema, forgotPasswordSchema } from '@/lib/validations/auth'
-import type { LoginInput, RegisterInput, ForgotPasswordInput } from '@/lib/validations/auth'
+import { loginSchema, registerSchema, forgotPasswordSchema, resetPasswordSchema } from '@/lib/validations/auth'
+import type { LoginInput, RegisterInput, ForgotPasswordInput, ResetPasswordInput } from '@/lib/validations/auth'
 
 export async function login(data: LoginInput) {
   const validated = loginSchema.safeParse(data)
@@ -71,6 +71,28 @@ export async function forgotPassword(data: ForgotPasswordInput) {
   }
 
   return { success: true }
+}
+
+export async function updatePassword(data: ResetPasswordInput) {
+  const validated = resetPasswordSchema.safeParse(data)
+  if (!validated.success) {
+    return { error: 'Dados inválidos. Verifique e tente novamente.' }
+  }
+
+  const supabase = createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) {
+    return { error: 'Link de recuperação inválido ou expirado. Solicite um novo.' }
+  }
+
+  const { error } = await supabase.auth.updateUser({ password: validated.data.password })
+  if (error) {
+    return { error: 'Não foi possível redefinir a senha. Tente novamente.' }
+  }
+
+  await supabase.auth.signOut()
+  revalidatePath('/', 'layout')
+  redirect('/login')
 }
 
 export async function logout() {
