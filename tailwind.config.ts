@@ -84,12 +84,23 @@ const config: Config = {
           from: { opacity: '0', transform: 'translateX(8px)' },
           to: { opacity: '1', transform: 'translateX(0)' },
         },
+        'pop-in': {
+          '0%': { opacity: '0', transform: 'scale(0.96) translateY(6px)' },
+          '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+        },
+        'drop-settle': {
+          '0%': { transform: 'scale(1.04)' },
+          '60%': { transform: 'scale(0.98)' },
+          '100%': { transform: 'scale(1)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.3s ease-out',
         'slide-in-right': 'slide-in-right 0.2s ease-out',
+        'pop-in': 'pop-in 0.25s cubic-bezier(0.22, 1, 0.36, 1)',
+        'drop-settle': 'drop-settle 0.3s ease-out',
       },
     },
   },

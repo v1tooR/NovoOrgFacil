@@ -24,6 +24,12 @@ export interface Client {
   updated_at: string
 }
 
+export interface ProjectPhase {
+  id: string
+  title: string
+  done: boolean
+}
+
 export interface Project {
   id: string
   user_id: string
@@ -32,6 +38,7 @@ export interface Project {
   description: string | null
   status: ProjectStatus
   deadline: string | null
+  phases: ProjectPhase[]
   created_at: string
   updated_at: string
   client?: Client | null

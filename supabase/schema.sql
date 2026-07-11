@@ -42,6 +42,7 @@ create table public.projects (
   status text not null default 'planning'
     check (status in ('planning', 'in_progress', 'waiting_client', 'completed', 'paused')),
   deadline date,
+  phases jsonb not null default '[]'::jsonb,
   created_at timestamptz default now() not null,
   updated_at timestamptz default now() not null
 );

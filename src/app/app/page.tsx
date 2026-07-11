@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import { CheckSquare, FolderKanban, TrendingUp, TrendingDown, Wallet, StickyNote, Plus } from 'lucide-react'
+import { CheckSquare, FolderKanban, TrendingUp, TrendingDown, Wallet, StickyNote, Plus, PartyPopper, CalendarClock } from 'lucide-react'
 import { StatCard } from '@/components/shared/StatCard'
 import { TaskCard } from '@/components/tasks/TaskCard'
 import { NoteCard } from '@/components/notes/NoteCard'
@@ -8,10 +8,12 @@ import { CreateTaskDialog } from '@/components/tasks/CreateTaskDialog'
 import { CreateProjectDialog } from '@/components/projects/CreateProjectDialog'
 import { CreateFinanceDialog } from '@/components/finance/CreateFinanceDialog'
 import { CreateNoteDialog } from '@/components/notes/CreateNoteDialog'
+import { ExpenseByCategoryChart } from '@/components/finance/ExpenseByCategoryChartLazy'
 import { Badge } from '@/components/ui/badge'
 import { EmptyState } from '@/components/shared/EmptyState'
-import { formatCurrency, PROJECT_STATUS_LABELS, isOverdue } from '@/lib/utils'
-import { startOfMonth, endOfMonth, format } from 'date-fns'
+import { cn, formatCurrency, PROJECT_STATUS_LABELS, isOverdue } from '@/lib/utils'
+import { startOfMonth, endOfMonth, format, differenceInCalendarDays } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import type { Task, Project, FinancialEntry, QuickNote, Client } from '@/types'
 
 export default async function DashboardPage() {
@@ -51,45 +53,80 @@ export default async function DashboardPage() {
   const income = (monthEntries ?? []).filter((e: FinancialEntry) => e.type === 'income').reduce((s: number, e: FinancialEntry) => s + Number(e.amount), 0)
   const expenses = (monthEntries ?? []).filter((e: FinancialEntry) => e.type === 'expense').reduce((s: number, e: FinancialEntry) => s + Number(e.amount), 0)
   const pending = (monthEntries ?? []).filter((e: FinancialEntry) => e.status === 'pending').reduce((s: number, e: FinancialEntry) => s + Number(e.amount), 0)
+  const balance = income - expenses
+
+  const expensesByCategory = Object.entries(
+    (monthEntries ?? [])
+      .filter((e: FinancialEntry) => e.type === 'expense')
+      .reduce((acc: Record<string, number>, e: FinancialEntry) => {
+        acc[e.category] = (acc[e.category] ?? 0) + Number(e.amount)
+        return acc
+      }, {})
+  )
+    .map(([category, amount]) => ({ category, amount: amount as number }))
+    .sort((a, b) => b.amount - a.amount)
+    .slice(0, 5)
+
+  const allClear = todayTasks.length === 0 && overdueTasks.length === 0
 
   const hour = new Date().getHours()
   const greeting = hour < 12 ? 'Bom dia' : hour < 18 ? 'Boa tarde' : 'Boa noite'
   const firstName = profile?.full_name?.split(' ')[0] || 'por aqui'
+  const todayLabel = format(new Date(), "EEEE, d 'de' MMMM", { locale: ptBR })
 
   return (
     <div className="space-y-8 animate-fade-in">
       {/* Greeting */}
-      <div className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight">{greeting}, {firstName}!</h1>
-        <p className="text-sm text-muted-foreground">
-          {todayTasks.length > 0
-            ? `Você tem ${todayTasks.length} tarefa${todayTasks.length > 1 ? 's' : ''} para hoje.`
-            : 'Tudo em dia por aqui. Bom trabalho!'}
-        </p>
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+        <div className="space-y-1">
+          <p className="text-xs font-medium text-primary capitalize">{todayLabel}</p>
+          <h1 className="text-2xl font-bold tracking-tight">{greeting}, {firstName}!</h1>
+          <p className="text-sm text-muted-foreground">
+            {todayTasks.length > 0
+              ? `Você tem ${todayTasks.length} tarefa${todayTasks.length > 1 ? 's' : ''} para hoje.`
+              : 'Tudo em dia por aqui. Bom trabalho!'}
+          </p>
+        </div>
       </div>
 
       {/* Quick actions */}
       <div className="flex flex-wrap gap-2">
         <CreateTaskDialog clients={clients ?? []} projects={projects ?? []} defaultDate={today}
-          trigger={<button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border bg-card hover:bg-muted transition-colors"><Plus className="h-3.5 w-3.5 text-primary" />Nova tarefa</button>}
+          trigger={<button className="group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border bg-card hover:bg-primary/5 hover:border-primary/30 hover:shadow-sm transition-all duration-150 cursor-pointer"><Plus className="h-3.5 w-3.5 text-primary transition-transform duration-150 group-hover:rotate-90" />Nova tarefa</button>}
         />
         <CreateProjectDialog clients={clients ?? []}
-          trigger={<button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border bg-card hover:bg-muted transition-colors"><Plus className="h-3.5 w-3.5 text-primary" />Novo projeto</button>}
+          trigger={<button className="group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border bg-card hover:bg-primary/5 hover:border-primary/30 hover:shadow-sm transition-all duration-150 cursor-pointer"><Plus className="h-3.5 w-3.5 text-primary transition-transform duration-150 group-hover:rotate-90" />Novo projeto</button>}
         />
         <CreateFinanceDialog clients={clients ?? []} projects={projects ?? []}
-          trigger={<button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border bg-card hover:bg-muted transition-colors"><Plus className="h-3.5 w-3.5 text-primary" />Novo lançamento</button>}
+          trigger={<button className="group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border bg-card hover:bg-primary/5 hover:border-primary/30 hover:shadow-sm transition-all duration-150 cursor-pointer"><Plus className="h-3.5 w-3.5 text-primary transition-transform duration-150 group-hover:rotate-90" />Novo lançamento</button>}
         />
         <CreateNoteDialog
-          trigger={<button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border bg-card hover:bg-muted transition-colors"><Plus className="h-3.5 w-3.5 text-primary" />Nova nota</button>}
+          trigger={<button className="group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border bg-card hover:bg-primary/5 hover:border-primary/30 hover:shadow-sm transition-all duration-150 cursor-pointer"><Plus className="h-3.5 w-3.5 text-primary transition-transform duration-150 group-hover:rotate-90" />Nova nota</button>}
         />
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <StatCard label="Tarefas hoje" value={todayTasks.length} icon={CheckSquare} variant={todayTasks.length > 0 ? 'primary' : 'default'} />
-        <StatCard label="Atrasadas" value={overdueTasks.length} icon={CheckSquare} variant={overdueTasks.length > 0 ? 'destructive' : 'default'} />
-        <StatCard label="Projetos ativos" value={activeProjects?.length ?? 0} icon={FolderKanban} variant="default" />
-        <StatCard label="Saldo do mês" value={formatCurrency(income - expenses)} icon={Wallet} variant={income - expenses >= 0 ? 'success' : 'destructive'} description={`${formatCurrency(pending)} pendente`} />
+        <StatCard
+          label="Tarefas hoje" value={todayTasks.length} icon={CheckSquare}
+          variant={todayTasks.length > 0 ? 'primary' : 'default'} href="/app/tarefas"
+          style={{ animationDelay: '0ms' }} className="animate-fade-in"
+        />
+        <StatCard
+          label="Atrasadas" value={overdueTasks.length} icon={CheckSquare}
+          variant={overdueTasks.length > 0 ? 'destructive' : 'default'} href="/app/tarefas"
+          style={{ animationDelay: '60ms' }} className="animate-fade-in"
+        />
+        <StatCard
+          label="Projetos ativos" value={activeProjects?.length ?? 0} icon={FolderKanban}
+          variant="default" href="/app/projetos"
+          style={{ animationDelay: '120ms' }} className="animate-fade-in"
+        />
+        <StatCard
+          label="Saldo do mês" value={formatCurrency(balance)} icon={Wallet}
+          variant={balance >= 0 ? 'success' : 'destructive'} description={`${formatCurrency(pending)} pendente`}
+          href="/app/financeiro" style={{ animationDelay: '180ms' }} className="animate-fade-in"
+        />
       </div>
 
       <div className="grid lg:grid-cols-2 gap-6">
@@ -102,7 +139,17 @@ export default async function DashboardPage() {
             )}
           </div>
           {todayTasks.length === 0 ? (
-            <EmptyState icon={CheckSquare} title="Nenhuma tarefa para hoje" description="Aproveite o dia ou adicione novas tarefas!" />
+            allClear ? (
+              <div className="flex flex-col items-center justify-center py-16 px-4 text-center rounded-xl border border-dashed border-success/30 bg-success/[0.03]">
+                <div className="h-14 w-14 rounded-2xl bg-success/10 flex items-center justify-center mb-4">
+                  <PartyPopper className="h-7 w-7 text-success" />
+                </div>
+                <h3 className="text-base font-semibold text-foreground mb-1">Tudo em dia!</h3>
+                <p className="text-sm text-muted-foreground max-w-xs">Nenhuma tarefa pendente para hoje. Aproveite para planejar o que vem por aí.</p>
+              </div>
+            ) : (
+              <EmptyState icon={CheckSquare} title="Nenhuma tarefa para hoje" description="Aproveite o dia ou adicione novas tarefas!" />
+            )
           ) : (
             <div className="space-y-2">
               {todayTasks.map((task) => <TaskCard key={task.id} task={task as Task} />)}
@@ -127,17 +174,31 @@ export default async function DashboardPage() {
               <EmptyState icon={FolderKanban} title="Nenhum projeto ativo" description="Crie um projeto para começar." />
             ) : (
               <div className="space-y-2">
-                {activeProjects!.map((project) => (
-                  <div key={project.id} className="flex items-center justify-between p-3 rounded-xl border bg-card">
-                    <div className="min-w-0">
-                      <p className="text-sm font-medium truncate">{project.name}</p>
-                      {project.client && <p className="text-xs text-muted-foreground">{(project as any).client.name}</p>}
+                {activeProjects!.map((project) => {
+                  const daysLeft = project.deadline ? differenceInCalendarDays(new Date(project.deadline), new Date()) : null
+                  return (
+                    <div key={project.id} className="group flex items-center justify-between p-3 rounded-xl border bg-card hover:shadow-sm hover:border-primary/20 transition-all duration-150">
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium truncate">{project.name}</p>
+                        <div className="flex items-center gap-2 mt-0.5">
+                          {project.client && <p className="text-xs text-muted-foreground truncate">{(project as any).client.name}</p>}
+                          {daysLeft !== null && (
+                            <span className={cn(
+                              'flex items-center gap-1 text-[10px] shrink-0',
+                              daysLeft < 0 ? 'text-destructive' : daysLeft <= 3 ? 'text-warning' : 'text-muted-foreground'
+                            )}>
+                              <CalendarClock className="h-3 w-3" />
+                              {daysLeft < 0 ? 'Prazo vencido' : daysLeft === 0 ? 'Prazo hoje' : `${daysLeft}d restantes`}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      <Badge variant={project.status as any} className="shrink-0 text-[10px]">
+                        {PROJECT_STATUS_LABELS[project.status as Project['status']]}
+                      </Badge>
                     </div>
-                    <Badge variant={project.status as any} className="shrink-0 text-[10px]">
-                      {PROJECT_STATUS_LABELS[project.status as Project['status']]}
-                    </Badge>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             )}
           </section>
@@ -146,21 +207,28 @@ export default async function DashboardPage() {
           <section>
             <h2 className="font-semibold text-sm mb-3">Financeiro do mês</h2>
             <div className="grid grid-cols-2 gap-2">
-              <div className="p-3 rounded-xl border bg-green-50 border-green-100">
+              <div className="p-3 rounded-xl border border-success/15 bg-success/[0.06]">
                 <div className="flex items-center gap-1.5 mb-1">
-                  <TrendingUp className="h-3.5 w-3.5 text-green-600" />
-                  <span className="text-xs text-green-700 font-medium">Receitas</span>
+                  <TrendingUp className="h-3.5 w-3.5 text-success" />
+                  <span className="text-xs text-success font-medium">Receitas</span>
                 </div>
-                <p className="text-base font-bold text-green-700">{formatCurrency(income)}</p>
+                <p className="text-base font-bold text-success">{formatCurrency(income)}</p>
               </div>
-              <div className="p-3 rounded-xl border bg-red-50 border-red-100">
+              <div className="p-3 rounded-xl border border-destructive/15 bg-destructive/[0.06]">
                 <div className="flex items-center gap-1.5 mb-1">
-                  <TrendingDown className="h-3.5 w-3.5 text-red-500" />
-                  <span className="text-xs text-red-600 font-medium">Despesas</span>
+                  <TrendingDown className="h-3.5 w-3.5 text-destructive" />
+                  <span className="text-xs text-destructive font-medium">Despesas</span>
                 </div>
-                <p className="text-base font-bold text-red-600">{formatCurrency(expenses)}</p>
+                <p className="text-base font-bold text-destructive">{formatCurrency(expenses)}</p>
               </div>
             </div>
+
+            {expensesByCategory.length > 0 && (
+              <div className="mt-3 p-3 rounded-xl border bg-card">
+                <p className="text-xs font-medium text-muted-foreground mb-2">Despesas por categoria</p>
+                <ExpenseByCategoryChart data={expensesByCategory} />
+              </div>
+            )}
           </section>
 
           {/* Recent notes */}
@@ -169,10 +237,7 @@ export default async function DashboardPage() {
               <h2 className="font-semibold text-sm mb-3">Notas recentes</h2>
               <div className="space-y-2">
                 {recentNotes!.slice(0, 2).map((note) => (
-                  <div key={note.id} className="p-3 rounded-xl border bg-card">
-                    <p className="text-sm font-medium truncate">{note.title}</p>
-                    {note.content && <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">{note.content}</p>}
-                  </div>
+                  <NoteCard key={note.id} note={note as QuickNote} />
                 ))}
               </div>
             </section>

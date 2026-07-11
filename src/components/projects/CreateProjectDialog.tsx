@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2, Plus } from 'lucide-react'
@@ -13,7 +13,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { projectSchema, type ProjectInput } from '@/lib/validations/projects'
-import { createProject } from '@/actions/projects'
+import { createProject, updateProject } from '@/actions/projects'
 import { useToast } from '@/components/ui/use-toast'
 import type { Client, Project } from '@/types'
 
@@ -23,12 +23,14 @@ interface CreateProjectDialogProps {
   editProject?: Project | null
   open?: boolean
   onOpenChange?: (open: boolean) => void
+  onSuccess?: () => void
 }
 
-export function CreateProjectDialog({ clients, trigger, editProject, open: controlledOpen, onOpenChange: controlledOnOpenChange }: CreateProjectDialogProps) {
+export function CreateProjectDialog({ clients, trigger, editProject, open: controlledOpen, onOpenChange: controlledOnOpenChange, onSuccess }: CreateProjectDialogProps) {
   const [internalOpen, setInternalOpen] = useState(false)
   const open = controlledOpen ?? internalOpen
   const setOpen = controlledOnOpenChange ?? setInternalOpen
+  const isEdit = !!editProject
   const { toast } = useToast()
 
   const form = useForm<ProjectInput>({
@@ -42,27 +44,43 @@ export function CreateProjectDialog({ clients, trigger, editProject, open: contr
     },
   })
 
+  // Keep the form in sync when opening in edit mode (or switching target project).
+  useEffect(() => {
+    if (open && editProject) {
+      form.reset({
+        name: editProject.name,
+        description: editProject.description ?? '',
+        status: editProject.status,
+        client_id: editProject.client_id ?? null,
+        deadline: editProject.deadline ?? '',
+      })
+    }
+  }, [open, editProject, form])
+
   async function onSubmit(data: ProjectInput) {
-    const result = await createProject(data)
+    const result = isEdit
+      ? await updateProject(editProject!.id, data)
+      : await createProject(data)
     if (result.error) {
       toast({ title: 'Erro', description: result.error, variant: 'destructive' })
     } else {
-      toast({ title: 'Projeto criado!' })
-      form.reset()
+      toast({ title: isEdit ? 'Projeto atualizado!' : 'Projeto criado!' })
+      if (!isEdit) form.reset()
       setOpen(false)
+      onSuccess?.()
     }
   }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      {!controlledOpen && (
+      {controlledOpen === undefined && (
         <DialogTrigger asChild>
           {trigger ?? <Button size="sm"><Plus className="h-4 w-4" />Novo projeto</Button>}
         </DialogTrigger>
       )}
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Novo projeto</DialogTitle>
+          <DialogTitle>{isEdit ? 'Editar projeto' : 'Novo projeto'}</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -126,7 +144,7 @@ export function CreateProjectDialog({ clients, trigger, editProject, open: contr
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => setOpen(false)}>Cancelar</Button>
               <Button type="submit" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? <><Loader2 className="h-4 w-4 animate-spin" />Salvando...</> : 'Criar projeto'}
+                {form.formState.isSubmitting ? <><Loader2 className="h-4 w-4 animate-spin" />Salvando...</> : isEdit ? 'Salvar' : 'Criar projeto'}
               </Button>
             </DialogFooter>
           </form>

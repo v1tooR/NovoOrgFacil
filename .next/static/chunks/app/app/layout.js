@@ -668,7 +668,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   forgotPassword: function() { return /* binding */ forgotPassword; },
 /* harmony export */   login: function() { return /* binding */ login; },
 /* harmony export */   logout: function() { return /* binding */ logout; },
-/* harmony export */   register: function() { return /* binding */ register; }
+/* harmony export */   register: function() { return /* binding */ register; },
+/* harmony export */   updatePassword: function() { return /* binding */ updatePassword; }
 /* harmony export */ });
 /* harmony import */ var next_dist_client_app_call_server__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/dist/client/app-call-server */ "(app-pages-browser)/./node_modules/next/dist/client/app-call-server.js");
 /* harmony import */ var next_dist_client_app_call_server__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_app_call_server__WEBPACK_IMPORTED_MODULE_0__);
@@ -680,11 +681,12 @@ function __build_action__(action, args) {
   return (0,next_dist_client_app_call_server__WEBPACK_IMPORTED_MODULE_0__.callServer)(action.$$id, args)
 }
 
-/* __next_internal_action_entry_do_not_use__ {"2dbedd5ea362e416123b6ca897bd76c16052895e":"logout","30446bb1d36321d5f682dec211eb71f30fff5e43":"forgotPassword","58acf2b59be014cca8ea4e90d52954abefd050d0":"login","5de4e65392511bc8ccfcab2b787bd401a87f13b7":"register"} */ var logout = (0,private_next_rsc_action_client_wrapper__WEBPACK_IMPORTED_MODULE_1__.createServerReference)("2dbedd5ea362e416123b6ca897bd76c16052895e");
+/* __next_internal_action_entry_do_not_use__ {"0dd13fdb7664dc91586e21b6eddf2f5663c7b18a":"updatePassword","2dbedd5ea362e416123b6ca897bd76c16052895e":"logout","30446bb1d36321d5f682dec211eb71f30fff5e43":"forgotPassword","58acf2b59be014cca8ea4e90d52954abefd050d0":"login","5de4e65392511bc8ccfcab2b787bd401a87f13b7":"register"} */ var logout = (0,private_next_rsc_action_client_wrapper__WEBPACK_IMPORTED_MODULE_1__.createServerReference)("2dbedd5ea362e416123b6ca897bd76c16052895e");
 
 var login = (0,private_next_rsc_action_client_wrapper__WEBPACK_IMPORTED_MODULE_1__.createServerReference)("58acf2b59be014cca8ea4e90d52954abefd050d0");
 var register = (0,private_next_rsc_action_client_wrapper__WEBPACK_IMPORTED_MODULE_1__.createServerReference)("5de4e65392511bc8ccfcab2b787bd401a87f13b7");
 var forgotPassword = (0,private_next_rsc_action_client_wrapper__WEBPACK_IMPORTED_MODULE_1__.createServerReference)("30446bb1d36321d5f682dec211eb71f30fff5e43");
+var updatePassword = (0,private_next_rsc_action_client_wrapper__WEBPACK_IMPORTED_MODULE_1__.createServerReference)("0dd13fdb7664dc91586e21b6eddf2f5663c7b18a");
 
 
 

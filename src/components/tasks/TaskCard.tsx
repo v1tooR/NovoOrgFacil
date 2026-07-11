@@ -11,7 +11,7 @@ import {
 import { ConfirmDeleteDialog } from '@/components/shared/ConfirmDeleteDialog'
 import { toggleTaskStatus, deleteTask } from '@/actions/tasks'
 import { cn, formatDate, TASK_PRIORITY_LABELS } from '@/lib/utils'
-import type { Task } from '@/types'
+import type { Task, TaskStatus } from '@/types'
 
 const priorityVariants = {
   low: 'low' as const,
@@ -22,31 +22,50 @@ const priorityVariants = {
 interface TaskCardProps {
   task: Task
   onEdit?: (task: Task) => void
+  /** Optimistic status handler owned by the page. Falls back to a direct call when omitted. */
+  onStatusChange?: (taskId: string, status: TaskStatus) => void
+  /** Optimistic delete owned by the page. Falls back to a direct call when omitted. */
+  onDelete?: (taskId: string) => Promise<void>
 }
 
-export function TaskCard({ task, onEdit }: TaskCardProps) {
+export function TaskCard({ task, onEdit, onStatusChange, onDelete }: TaskCardProps) {
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
 
   const completed = task.status === 'completed'
 
   function handleToggle(checked: boolean) {
+    if (onStatusChange) {
+      onStatusChange(task.id, checked ? 'completed' : 'pending')
+      return
+    }
     startTransition(() => {
       toggleTaskStatus(task.id, checked)
     })
   }
 
   async function handleDelete() {
+    if (onDelete) return onDelete(task.id)
     await deleteTask(task.id)
   }
 
   return (
     <>
       <div className={cn(
-        'group flex items-start gap-3 p-3.5 rounded-xl border bg-card transition-all duration-150 hover:shadow-sm',
+        'group relative flex items-start gap-3 p-3.5 pl-4 rounded-xl border bg-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-primary/30',
         completed && 'opacity-60',
         isPending && 'opacity-50 pointer-events-none'
       )}>
+        <span
+          className={cn(
+            'absolute left-0 top-3 bottom-3 w-1 rounded-full transition-colors',
+            task.priority === 'high' && 'bg-red-400',
+            task.priority === 'medium' && 'bg-amber-400',
+            task.priority === 'low' && 'bg-slate-300',
+            completed && 'bg-green-400'
+          )}
+          aria-hidden
+        />
         <Checkbox
           checked={completed}
           onCheckedChange={handleToggle}

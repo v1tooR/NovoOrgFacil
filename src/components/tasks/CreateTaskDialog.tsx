@@ -22,9 +22,11 @@ interface CreateTaskDialogProps {
   projects: Project[]
   trigger?: React.ReactNode
   defaultDate?: string
+  /** Called after a task is created so the caller can refresh its list. */
+  onSuccess?: () => void
 }
 
-export function CreateTaskDialog({ clients, projects, trigger, defaultDate }: CreateTaskDialogProps) {
+export function CreateTaskDialog({ clients, projects, trigger, defaultDate, onSuccess }: CreateTaskDialogProps) {
   const [open, setOpen] = useState(false)
   const { toast } = useToast()
 
@@ -50,6 +52,7 @@ export function CreateTaskDialog({ clients, projects, trigger, defaultDate }: Cr
       toast({ title: 'Tarefa criada!', variant: 'default' })
       form.reset()
       setOpen(false)
+      onSuccess?.()
     }
   }
 

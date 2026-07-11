@@ -23,9 +23,11 @@ interface EditTaskDialogProps {
   onOpenChange: (open: boolean) => void
   clients: Client[]
   projects: Project[]
+  /** Called after a task is updated so the caller can refresh its list. */
+  onSuccess?: () => void
 }
 
-export function EditTaskDialog({ task, open, onOpenChange, clients, projects }: EditTaskDialogProps) {
+export function EditTaskDialog({ task, open, onOpenChange, clients, projects, onSuccess }: EditTaskDialogProps) {
   const { toast } = useToast()
 
   const form = useForm<TaskInput>({
@@ -55,6 +57,7 @@ export function EditTaskDialog({ task, open, onOpenChange, clients, projects }: 
     } else {
       toast({ title: 'Tarefa atualizada!' })
       onOpenChange(false)
+      onSuccess?.()
     }
   }
 
