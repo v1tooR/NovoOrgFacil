@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST="{\"components\\\\finance\\\\ExpenseByCategoryChartLazy.tsx -> ./ExpenseByCategoryChart\":{\"id\":\"components\\\\finance\\\\ExpenseByCategoryChartLazy.tsx -> ./ExpenseByCategoryChart\",\"files\":[\"static/chunks/_app-pages-browser_src_components_finance_ExpenseByCategoryChart_tsx.js\"]}}"

@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { CheckSquare, FolderKanban, TrendingUp, TrendingDown, Wallet, StickyNote, Plus, PartyPopper, CalendarClock } from 'lucide-react'
 import { StatCard } from '@/components/shared/StatCard'
-import { TaskCard } from '@/components/tasks/TaskCard'
+import { EditableTaskCard } from '@/components/tasks/EditableTaskCard'
 import { NoteCard } from '@/components/notes/NoteCard'
 import { CreateTaskDialog } from '@/components/tasks/CreateTaskDialog'
 import { CreateProjectDialog } from '@/components/projects/CreateProjectDialog'
@@ -152,14 +152,18 @@ export default async function DashboardPage() {
             )
           ) : (
             <div className="space-y-2">
-              {todayTasks.map((task) => <TaskCard key={task.id} task={task as Task} />)}
+              {todayTasks.map((task) => (
+                <EditableTaskCard key={task.id} task={task as Task} clients={clients ?? []} projects={projects ?? []} />
+              ))}
             </div>
           )}
           {overdueTasks.length > 0 && (
             <div className="mt-4">
               <p className="text-xs font-medium text-destructive mb-2">Atrasadas</p>
               <div className="space-y-2">
-                {overdueTasks.slice(0, 3).map((task) => <TaskCard key={task.id} task={task as Task} />)}
+                {overdueTasks.slice(0, 3).map((task) => (
+                  <EditableTaskCard key={task.id} task={task as Task} clients={clients ?? []} projects={projects ?? []} />
+                ))}
               </div>
             </div>
           )}

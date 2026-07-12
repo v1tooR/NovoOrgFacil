@@ -73,8 +73,14 @@ export function TaskCard({ task, onEdit, onStatusChange, onDelete }: TaskCardPro
           aria-label="Marcar como concluída"
         />
 
-        <div className="flex-1 min-w-0">
-          <p className={cn('text-sm font-medium leading-snug', completed && 'line-through text-muted-foreground')}>
+        <button
+          type="button"
+          onClick={() => onEdit?.(task)}
+          disabled={!onEdit}
+          aria-label={onEdit ? `Editar tarefa: ${task.title}` : undefined}
+          className={cn('flex-1 min-w-0 text-left', onEdit && 'cursor-pointer')}
+        >
+          <p className={cn('text-sm font-medium leading-snug', onEdit && 'group-hover:text-primary transition-colors', completed && 'line-through text-muted-foreground')}>
             {task.title}
           </p>
           {task.description && (
@@ -102,11 +108,14 @@ export function TaskCard({ task, onEdit, onStatusChange, onDelete }: TaskCardPro
               </span>
             )}
           </div>
-        </div>
+        </button>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="opacity-0 group-hover:opacity-100 focus:opacity-100 p-1 rounded-md hover:bg-muted transition-all shrink-0">
+            <button
+              aria-label="Ações da tarefa"
+              className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 p-1 rounded-md hover:bg-muted transition-all shrink-0"
+            >
               <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
             </button>
           </DropdownMenuTrigger>

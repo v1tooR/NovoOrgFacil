@@ -31,13 +31,26 @@ export async function createTask(data: TaskInput) {
 }
 
 export async function updateTask(id: string, data: Partial<TaskInput>) {
+  const validated = taskSchema.partial().safeParse(data)
+  if (!validated.success) {
+    return { error: 'Dados inválidos.' }
+  }
+
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Não autorizado.' }
 
+  // Only touch fields that were actually provided, and normalize the empty
+  // strings the form sends for optional fields into real NULLs.
+  const patch: Record<string, unknown> = { updated_at: new Date().toISOString() }
+  const nullable = ['due_date', 'due_time', 'project_id', 'client_id'] as const
+  for (const [key, value] of Object.entries(validated.data)) {
+    patch[key] = nullable.includes(key as (typeof nullable)[number]) ? (value || null) : value
+  }
+
   const { error } = await supabase
     .from('tasks')
-    .update({ ...data, updated_at: new Date().toISOString() })
+    .update(patch)
     .eq('id', id)
     .eq('user_id', user.id)
 

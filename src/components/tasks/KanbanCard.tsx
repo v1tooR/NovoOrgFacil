@@ -74,9 +74,24 @@ export function KanbanCard({ task, onEdit, onDelete, dragging, preview }: Kanban
             <GripVertical className="h-4 w-4" />
           </button>
 
-          <p className={cn('flex-1 min-w-0 text-sm font-medium leading-snug break-words', completed && 'line-through text-muted-foreground')}>
-            {task.title}
-          </p>
+          {onEdit && !preview ? (
+            <button
+              type="button"
+              data-no-drag
+              onClick={() => onEdit(task)}
+              aria-label={`Editar tarefa: ${task.title}`}
+              className={cn(
+                'flex-1 min-w-0 text-left text-sm font-medium leading-snug break-words transition-colors hover:text-primary',
+                completed && 'line-through text-muted-foreground'
+              )}
+            >
+              {task.title}
+            </button>
+          ) : (
+            <p className={cn('flex-1 min-w-0 text-sm font-medium leading-snug break-words', completed && 'line-through text-muted-foreground')}>
+              {task.title}
+            </p>
+          )}
 
           {!preview && (
             <DropdownMenu>
@@ -84,7 +99,7 @@ export function KanbanCard({ task, onEdit, onDelete, dragging, preview }: Kanban
                 <button
                   data-no-drag
                   aria-label="Ações da tarefa"
-                  className="shrink-0 rounded-md p-1 text-muted-foreground opacity-0 transition-all hover:bg-muted group-hover/card:opacity-100 focus-visible:opacity-100"
+                  className="shrink-0 rounded-md p-1 text-muted-foreground opacity-100 transition-all hover:bg-muted sm:opacity-0 sm:group-hover/card:opacity-100 focus-visible:opacity-100"
                 >
                   <MoreHorizontal className="h-4 w-4" />
                 </button>
