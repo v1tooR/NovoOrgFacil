@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Wallet, TrendingUp, TrendingDown, Clock } from 'lucide-react'
 import { format, startOfMonth, endOfMonth, subMonths, addMonths } from 'date-fns'
@@ -29,22 +29,21 @@ export default function FinanceiroPage() {
   const monthEnd = format(endOfMonth(currentDate), 'yyyy-MM-dd')
   const monthLabel = format(currentDate, 'MMMM yyyy', { locale: ptBR })
 
-  useEffect(() => {
-    async function load() {
-      setLoading(true)
-      const [{ data: entriesData }, { data: clientsData }, { data: projectsData }] = await Promise.all([
-        supabase.from('financial_entries').select('*, client:clients(id,name), project:projects(id,name)')
-          .gte('due_date', monthStart).lte('due_date', monthEnd).order('due_date', { ascending: false }),
-        supabase.from('clients').select('*').order('name'),
-        supabase.from('projects').select('*').order('name'),
-      ])
-      setEntries((entriesData ?? []) as FinancialEntry[])
-      setClients((clientsData ?? []) as Client[])
-      setProjects((projectsData ?? []) as Project[])
-      setLoading(false)
-    }
-    load()
+  const load = useCallback(async () => {
+    setLoading(true)
+    const [{ data: entriesData }, { data: clientsData }, { data: projectsData }] = await Promise.all([
+      supabase.from('financial_entries').select('*, client:clients(id,name), project:projects(id,name)')
+        .gte('due_date', monthStart).lte('due_date', monthEnd).order('due_date', { ascending: false }),
+      supabase.from('clients').select('*').order('name'),
+      supabase.from('projects').select('*').order('name'),
+    ])
+    setEntries((entriesData ?? []) as FinancialEntry[])
+    setClients((clientsData ?? []) as Client[])
+    setProjects((projectsData ?? []) as Project[])
+    setLoading(false)
   }, [monthStart, monthEnd])
+
+  useEffect(() => { load() }, [load])
 
   const income = useMemo(() => entries.filter((e) => e.type === 'income').reduce((s, e) => s + Number(e.amount), 0), [entries])
   const expenses = useMemo(() => entries.filter((e) => e.type === 'expense').reduce((s, e) => s + Number(e.amount), 0), [entries])
@@ -94,15 +93,15 @@ export default function FinanceiroPage() {
           </TabsList>
 
           <TabsContent value="todos" className="mt-4 space-y-2">
-            {entries.map((entry) => <FinanceCard key={entry.id} entry={entry} />)}
+            {entries.map((entry) => <FinanceCard key={entry.id} entry={entry} onChanged={load} />)}
           </TabsContent>
           <TabsContent value="receitas" className="mt-4 space-y-2">
             {incomeEntries.length === 0 ? <EmptyState icon={TrendingUp} title="Nenhuma receita" /> :
-              incomeEntries.map((entry) => <FinanceCard key={entry.id} entry={entry} />)}
+              incomeEntries.map((entry) => <FinanceCard key={entry.id} entry={entry} onChanged={load} />)}
           </TabsContent>
           <TabsContent value="despesas" className="mt-4 space-y-2">
             {expenseEntries.length === 0 ? <EmptyState icon={TrendingDown} title="Nenhuma despesa" /> :
-              expenseEntries.map((entry) => <FinanceCard key={entry.id} entry={entry} />)}
+              expenseEntries.map((entry) => <FinanceCard key={entry.id} entry={entry} onChanged={load} />)}
           </TabsContent>
         </Tabs>
       )}

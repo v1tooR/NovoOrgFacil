@@ -13,4 +13,8 @@ export const financeSchema = z.object({
   project_id: z.string().uuid().optional().nullable(),
 })
 
+export const financeStatusSchema = z.object({
+  status: z.enum(['pending', 'paid', 'received', 'overdue']),
+})
+
 export type FinanceInput = z.infer<typeof financeSchema>
