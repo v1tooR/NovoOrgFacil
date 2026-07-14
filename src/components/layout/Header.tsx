@@ -24,7 +24,7 @@ interface HeaderProps {
 
 export function Header({ profile, email }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-white/10 bg-sidebar px-4 text-sidebar-foreground lg:hidden">
+    <header className="pwa-safe-top sticky top-0 z-40 flex h-16 items-center justify-between border-b border-white/10 bg-sidebar px-4 text-sidebar-foreground lg:hidden">
       <Link href="/app" className="flex items-center gap-2" aria-label="Ir para o início">
         <span className="flex h-9 w-9 items-center justify-center border border-white/20 bg-sidebar p-1.5">
           <Image src={icon} alt="" aria-hidden className="h-full w-full" priority />

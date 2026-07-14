@@ -98,6 +98,21 @@
     padding-bottom: env(safe-area-inset-bottom);
   }
 
+  /* Mantém valores monetários dentro de cards em duas colunas. */
+  .responsive-financial-value {
+    font-size: 1rem;
+    font-size: clamp(0.875rem, 12cqi, 1.5rem);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .responsive-financial-summary {
+    font-size: 0.875rem;
+    font-size: clamp(0.75rem, 11cqi, 1rem);
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+
   /* Scrollbar customizada */
   .scrollbar-thin {
     scrollbar-width: thin;
@@ -113,6 +128,14 @@
   }
   .scrollbar-thin::-webkit-scrollbar-track {
     background: transparent;
+  }
+}
+
+/* Em modo instalado, a barra do sistema ocupa a área superior do viewport. */
+@media (display-mode: standalone), (display-mode: fullscreen) {
+  .pwa-safe-top {
+    height: calc(4rem + max(env(safe-area-inset-top, 0px), 1.5rem));
+    padding-top: max(env(safe-area-inset-top, 0px), 1.5rem);
   }
 }
 

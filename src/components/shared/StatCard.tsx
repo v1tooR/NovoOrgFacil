@@ -39,11 +39,13 @@ export function StatCard({
   className,
   style,
 }: StatCardProps) {
+  const isFormattedValue = typeof value === 'string'
+
   const content = (
     <div
       style={style}
       className={cn(
-        'group relative space-y-4 overflow-hidden rounded-lg border p-4 sm:p-5',
+        'group relative space-y-4 overflow-hidden rounded-lg border p-4 [container-type:inline-size] sm:p-5',
         'transition-all duration-200 ease-out',
         'hover:-translate-y-0.5 hover:border-foreground/50 hover:shadow-[4px_4px_0_hsl(var(--foreground)/0.08)]',
         href && 'cursor-pointer',
@@ -51,19 +53,24 @@ export function StatCard({
         className
       )}
     >
-      <div className="flex items-center justify-between">
-        <span className={cn('text-[10px] font-semibold uppercase tracking-[0.12em]', variant === 'primary' ? 'text-background/60' : 'text-muted-foreground')}>{label}</span>
+      <div className="flex items-start justify-between gap-2">
+        <span className={cn('min-w-0 text-[10px] font-semibold uppercase leading-relaxed tracking-[0.12em]', variant === 'primary' ? 'text-background/60' : 'text-muted-foreground')}>{label}</span>
         <div className={cn(
-          'flex h-9 w-9 items-center justify-center rounded-md transition-transform duration-200 group-hover:-rotate-3',
+          'flex h-9 w-9 shrink-0 items-center justify-center rounded-md transition-transform duration-200 group-hover:-rotate-3',
           iconStyles[variant]
         )}>
           <Icon className="h-4 w-4" />
         </div>
       </div>
-      <div>
-        <p className="text-2xl font-bold tracking-[-0.06em] tabular-nums">{value}</p>
+      <div className="min-w-0">
+        <p className={cn(
+          'font-bold tracking-[-0.06em] tabular-nums',
+          isFormattedValue ? 'responsive-financial-value' : 'text-2xl'
+        )}>
+          {value}
+        </p>
         {description && (
-          <p className="text-xs text-muted-foreground mt-0.5">{description}</p>
+          <p className="mt-0.5 break-words text-xs leading-relaxed text-muted-foreground">{description}</p>
         )}
       </div>
     </div>

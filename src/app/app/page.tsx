@@ -211,19 +211,19 @@ export default async function DashboardPage() {
           <section>
             <h2 className="font-semibold text-sm mb-3">Financeiro do mês</h2>
             <div className="grid grid-cols-2 gap-2">
-              <div className="p-3 rounded-xl border border-success/15 bg-success/[0.06]">
+              <div className="min-w-0 rounded-xl border border-success/15 bg-success/[0.06] p-3 [container-type:inline-size]">
                 <div className="flex items-center gap-1.5 mb-1">
                   <TrendingUp className="h-3.5 w-3.5 text-success" />
                   <span className="text-xs text-success font-medium">Receitas</span>
                 </div>
-                <p className="text-base font-bold text-success">{formatCurrency(income)}</p>
+                <p className="responsive-financial-summary font-bold text-success tabular-nums">{formatCurrency(income)}</p>
               </div>
-              <div className="p-3 rounded-xl border border-destructive/15 bg-destructive/[0.06]">
+              <div className="min-w-0 rounded-xl border border-destructive/15 bg-destructive/[0.06] p-3 [container-type:inline-size]">
                 <div className="flex items-center gap-1.5 mb-1">
                   <TrendingDown className="h-3.5 w-3.5 text-destructive" />
                   <span className="text-xs text-destructive font-medium">Despesas</span>
                 </div>
-                <p className="text-base font-bold text-destructive">{formatCurrency(expenses)}</p>
+                <p className="responsive-financial-summary font-bold text-destructive tabular-nums">{formatCurrency(expenses)}</p>
               </div>
             </div>
 

@@ -3,6 +3,11 @@ import Image from 'next/image'
 import logo from '@/lib/assets/logo.svg'
 import icon from '@/lib/assets/icone.svg'
 
+// As páginas de autenticação não podem ficar presas no CDN entre
+// publicações, pois o HTML referencia assets versionados de cada build.
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export const metadata: Metadata = {
   title: {
     default: 'Entrar',

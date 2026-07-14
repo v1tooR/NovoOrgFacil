@@ -50,7 +50,7 @@ export function FinanceCard({ entry, onEdit, onChanged }: FinanceCardProps) {
 
   return (
     <>
-      <div className="group flex items-center gap-3 p-3.5 rounded-xl border bg-card hover:shadow-sm transition-all duration-150">
+      <div className="group flex items-start gap-3 rounded-xl border bg-card p-3.5 transition-all duration-150 hover:shadow-sm sm:items-center">
         <div className={cn(
           'h-8 w-8 rounded-lg flex items-center justify-center shrink-0',
           isIncome ? 'bg-foreground text-background' : 'border bg-background text-foreground'
@@ -62,8 +62,8 @@ export function FinanceCard({ entry, onEdit, onChanged }: FinanceCardProps) {
 
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium truncate">{entry.title}</p>
-          <div className="flex items-center gap-2 mt-0.5">
-            <span className="text-xs text-muted-foreground">{entry.category}</span>
+          <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5">
+            <span className="max-w-full truncate text-xs text-muted-foreground">{entry.category}</span>
             <span className="text-muted-foreground">·</span>
             <span className="text-xs text-muted-foreground">{formatDate(entry.due_date)}</span>
             {entry.client && (
@@ -75,9 +75,9 @@ export function FinanceCard({ entry, onEdit, onChanged }: FinanceCardProps) {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
-          <div className="text-right">
-            <p className="text-sm font-semibold text-foreground">
+        <div className="flex min-w-0 shrink-0 items-center gap-1.5 sm:gap-2">
+          <div className="min-w-0 text-right">
+            <p className="whitespace-nowrap text-[clamp(0.6875rem,3.2vw,0.875rem)] font-semibold text-foreground tabular-nums">
               {isIncome ? '+' : '-'}{formatCurrency(entry.amount)}
             </p>
             <Badge variant={statusVariants[entry.status]} className="text-[10px] mt-0.5">
