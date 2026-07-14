@@ -15,18 +15,18 @@ interface StatCardProps {
 
 const variantStyles = {
   default: 'bg-card border-border',
-  success: 'bg-success/[0.06] border-success/15 hover:border-success/30',
-  warning: 'bg-warning/[0.06] border-warning/15 hover:border-warning/30',
-  destructive: 'bg-destructive/[0.06] border-destructive/15 hover:border-destructive/30',
-  primary: 'bg-primary/[0.06] border-primary/15 hover:border-primary/30',
+  success: 'bg-card border-foreground/20',
+  warning: 'bg-muted/60 border-foreground/20',
+  destructive: 'bg-card border-foreground/40',
+  primary: 'bg-foreground text-background border-foreground',
 }
 
 const iconStyles = {
   default: 'text-muted-foreground bg-muted',
-  success: 'text-success bg-success/15',
-  warning: 'text-warning bg-warning/15',
-  destructive: 'text-destructive bg-destructive/15',
-  primary: 'text-primary bg-primary/15',
+  success: 'text-background bg-foreground',
+  warning: 'text-foreground bg-background border',
+  destructive: 'text-foreground bg-background border border-foreground/30',
+  primary: 'text-foreground bg-background',
 }
 
 export function StatCard({
@@ -43,25 +43,25 @@ export function StatCard({
     <div
       style={style}
       className={cn(
-        'group relative overflow-hidden rounded-xl border p-4 space-y-3',
+        'group relative space-y-4 overflow-hidden rounded-lg border p-4 sm:p-5',
         'transition-all duration-200 ease-out',
-        'hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] hover:-translate-y-0.5',
+        'hover:-translate-y-0.5 hover:border-foreground/50 hover:shadow-[4px_4px_0_hsl(var(--foreground)/0.08)]',
         href && 'cursor-pointer',
         variantStyles[variant],
         className
       )}
     >
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-muted-foreground">{label}</span>
+        <span className={cn('text-[10px] font-semibold uppercase tracking-[0.12em]', variant === 'primary' ? 'text-background/60' : 'text-muted-foreground')}>{label}</span>
         <div className={cn(
-          'h-9 w-9 rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-110',
+          'flex h-9 w-9 items-center justify-center rounded-md transition-transform duration-200 group-hover:-rotate-3',
           iconStyles[variant]
         )}>
           <Icon className="h-4 w-4" />
         </div>
       </div>
       <div>
-        <p className="text-2xl font-bold tracking-tight tabular-nums">{value}</p>
+        <p className="text-2xl font-bold tracking-[-0.06em] tabular-nums">{value}</p>
         {description && (
           <p className="text-xs text-muted-foreground mt-0.5">{description}</p>
         )}

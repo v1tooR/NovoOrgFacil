@@ -50,9 +50,9 @@ export function KanbanCard({ task, onEdit, onDelete, dragging, preview }: Kanban
         <span
           className={cn(
             'absolute left-0 top-3 bottom-3 w-1 rounded-full',
-            task.priority === 'high' && 'bg-red-400',
-            task.priority === 'medium' && 'bg-amber-400',
-            task.priority === 'low' && 'bg-slate-300'
+            task.priority === 'high' && 'bg-foreground',
+            task.priority === 'medium' && 'bg-foreground/55',
+            task.priority === 'low' && 'bg-foreground/20'
           )}
           aria-hidden
         />

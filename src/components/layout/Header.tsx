@@ -1,9 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
-import { Menu, X, LogOut, Settings } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import Image from 'next/image'
+import { LogOut, Settings } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -16,6 +15,7 @@ import {
 import { logout } from '@/actions/auth'
 import { getInitials } from '@/lib/utils'
 import type { Profile } from '@/types'
+import icon from '@/lib/assets/icone.svg'
 
 interface HeaderProps {
   profile: Profile | null
@@ -24,21 +24,19 @@ interface HeaderProps {
 
 export function Header({ profile, email }: HeaderProps) {
   return (
-    <header className="lg:hidden sticky top-0 z-40 flex items-center justify-between h-14 px-4 bg-background/95 backdrop-blur border-b border-border">
-      <div className="flex items-center gap-2">
-        <div className="h-7 w-7 rounded-lg bg-primary flex items-center justify-center">
-          <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 text-white" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-        <span className="font-bold tracking-tight text-sm">OrganizaFlow</span>
-      </div>
+    <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-white/10 bg-sidebar px-4 text-sidebar-foreground lg:hidden">
+      <Link href="/app" className="flex items-center gap-2" aria-label="Ir para o início">
+        <span className="flex h-9 w-9 items-center justify-center border border-white/20 bg-sidebar p-1.5">
+          <Image src={icon} alt="" aria-hidden className="h-full w-full" priority />
+        </span>
+        <span className="text-xs font-semibold uppercase tracking-[0.12em]">Fácil Organização</span>
+      </Link>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="focus:outline-none">
-            <Avatar className="h-8 w-8">
-              <AvatarFallback className="text-xs">
+          <button className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-sidebar" aria-label="Abrir menu da conta">
+            <Avatar className="h-9 w-9 border border-white/25">
+              <AvatarFallback className="bg-white text-xs font-semibold text-black">
                 {getInitials(profile?.full_name || email)}
               </AvatarFallback>
             </Avatar>

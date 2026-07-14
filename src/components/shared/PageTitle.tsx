@@ -9,14 +9,15 @@ interface PageTitleProps {
 
 export function PageTitle({ title, description, action, className }: PageTitleProps) {
   return (
-    <div className={cn('flex items-start justify-between gap-4 mb-6', className)}>
+    <div className={cn('mb-8 flex flex-col items-start justify-between gap-5 border-b border-foreground/15 pb-5 sm:flex-row sm:items-end', className)}>
       <div className="min-w-0">
-        <h1 className="text-xl font-bold tracking-tight text-foreground">{title}</h1>
+        <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">Workspace / Geral</p>
+        <h1 className="text-2xl font-bold leading-none tracking-[-0.05em] text-foreground sm:text-3xl">{title}</h1>
         {description && (
-          <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>
+          <p className="mt-2 max-w-2xl text-xs leading-relaxed text-muted-foreground sm:text-sm">{description}</p>
         )}
       </div>
-      {action && <div className="shrink-0">{action}</div>}
+      {action && <div className="w-full shrink-0 sm:w-auto">{action}</div>}
     </div>
   )
 }

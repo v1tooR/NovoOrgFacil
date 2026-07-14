@@ -18,12 +18,12 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     .single()
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="app-canvas min-h-screen bg-background">
       <Sidebar profile={profile as Profile | null} email={user.email} />
       <Header profile={profile as Profile | null} email={user.email} />
 
-      <main className="lg:ml-60 min-h-screen pb-20 lg:pb-0">
-        <div className="max-w-5xl mx-auto px-4 py-6 lg:px-8 lg:py-8">
+      <main className="min-h-screen pb-28 lg:ml-72 lg:pb-0">
+        <div className="mx-auto max-w-[1280px] px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10 xl:px-12">
           {children}
         </div>
       </main>

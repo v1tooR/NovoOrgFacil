@@ -1,22 +1,27 @@
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans } from 'next/font/google'
+import { JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Toaster } from '@/components/ui/toaster'
+import favicon from '@/lib/assets/favicon.svg'
 
-const fontSans = Plus_Jakarta_Sans({
+const fontSans = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-sans',
   weight: ['300', '400', '500', '600', '700', '800'],
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'OrganizaFlow',
-    template: '%s | OrganizaFlow',
+    default: 'Fácil Organização',
+    template: '%s | Fácil Organização',
   },
   description: 'Central de organização para autônomos e pequenas empresas.',
   icons: {
-    icon: '/favicon.ico',
+    icon: {
+      url: favicon.src,
+      type: 'image/svg+xml',
+    },
   },
 }
 

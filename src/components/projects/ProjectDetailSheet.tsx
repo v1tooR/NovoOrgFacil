@@ -35,11 +35,11 @@ import type {
 
 const STATUS_ORDER: ProjectStatus[] = ['planning', 'in_progress', 'waiting_client', 'completed', 'paused']
 const statusDot: Record<ProjectStatus, string> = {
-  planning: 'bg-purple-500',
-  in_progress: 'bg-blue-500',
-  waiting_client: 'bg-orange-500',
-  completed: 'bg-green-500',
-  paused: 'bg-slate-400',
+  planning: 'bg-foreground/20',
+  in_progress: 'bg-foreground/50',
+  waiting_client: 'bg-foreground/70',
+  completed: 'bg-foreground',
+  paused: 'border border-foreground/50 bg-background',
 }
 
 function daysUntil(dateStr: string): number {
@@ -308,7 +308,7 @@ export function ProjectDetailSheet({ project, clients, open, onOpenChange }: Pro
                     <span className={cn(
                       'flex items-center gap-1 font-medium',
                       dl.tone === 'over' && 'text-destructive',
-                      dl.tone === 'warn' && 'text-amber-600',
+                      dl.tone === 'warn' && 'font-semibold text-foreground',
                       dl.tone === 'ok' && 'text-muted-foreground',
                     )}>
                       <CalendarDays className="h-3.5 w-3.5" /> {formatDate(project.deadline)} · {dl.text}
@@ -326,9 +326,9 @@ export function ProjectDetailSheet({ project, clients, open, onOpenChange }: Pro
             {/* Stats */}
             <div className="grid grid-cols-2 gap-2.5">
               <StatTile icon={ListChecks} label="Fases concluídas" value={`${phasesDone}/${phases.length}`} accent="bg-primary/10 text-primary" />
-              <StatTile icon={CheckSquare} label="Tarefas concluídas" value={`${tasksDone}/${tasks.length}`} accent="bg-blue-500/10 text-blue-600" />
-              <StatTile icon={StickyNote} label="Anotações" value={`${notes.length}`} accent="bg-amber-500/10 text-amber-600" />
-              <StatTile icon={Wallet} label="Saldo" value={formatCurrency(finance.balance)} accent={finance.balance >= 0 ? 'bg-green-500/10 text-green-600' : 'bg-red-500/10 text-red-600'} />
+              <StatTile icon={CheckSquare} label="Tarefas concluídas" value={`${tasksDone}/${tasks.length}`} accent="bg-foreground/10 text-foreground" />
+              <StatTile icon={StickyNote} label="Anotações" value={`${notes.length}`} accent="bg-muted text-foreground" />
+              <StatTile icon={Wallet} label="Saldo" value={formatCurrency(finance.balance)} accent={finance.balance >= 0 ? 'bg-foreground text-background' : 'border bg-background text-foreground'} />
             </div>
 
             {project.description && (
@@ -423,13 +423,13 @@ export function ProjectDetailSheet({ project, clients, open, onOpenChange }: Pro
                 <p className="rounded-xl border border-dashed py-4 text-center text-xs text-muted-foreground">Nenhum lançamento vinculado a este projeto.</p>
               ) : (
                 <div className="grid grid-cols-3 gap-2.5">
-                  <div className="rounded-xl border bg-green-500/5 p-3">
-                    <p className="text-[11px] text-muted-foreground">Receitas</p>
-                    <p className="mt-0.5 text-sm font-semibold text-green-600 tabular-nums">{formatCurrency(finance.income)}</p>
+                  <div className="rounded-xl border bg-foreground p-3 text-background">
+                    <p className="text-[11px] text-background/60">Receitas</p>
+                    <p className="mt-0.5 text-sm font-semibold tabular-nums">{formatCurrency(finance.income)}</p>
                   </div>
-                  <div className="rounded-xl border bg-red-500/5 p-3">
+                  <div className="rounded-xl border bg-background p-3">
                     <p className="text-[11px] text-muted-foreground">Despesas</p>
-                    <p className="mt-0.5 text-sm font-semibold text-red-600 tabular-nums">{formatCurrency(finance.expense)}</p>
+                    <p className="mt-0.5 text-sm font-semibold tabular-nums">{formatCurrency(finance.expense)}</p>
                   </div>
                   <div className="rounded-xl border bg-muted/40 p-3">
                     <p className="text-[11px] text-muted-foreground">Saldo</p>

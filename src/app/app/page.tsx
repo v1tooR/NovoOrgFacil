@@ -77,11 +77,11 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-8 animate-fade-in">
       {/* Greeting */}
-      <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-1 border-b border-foreground/15 pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div className="space-y-1">
-          <p className="text-xs font-medium text-primary capitalize">{todayLabel}</p>
-          <h1 className="text-2xl font-bold tracking-tight">{greeting}, {firstName}!</h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">{todayLabel}</p>
+          <h1 className="text-2xl font-bold leading-none tracking-[-0.05em] sm:text-3xl">{greeting}, {firstName}!</h1>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">
             {todayTasks.length > 0
               ? `Você tem ${todayTasks.length} tarefa${todayTasks.length > 1 ? 's' : ''} para hoje.`
               : 'Tudo em dia por aqui. Bom trabalho!'}
@@ -92,21 +92,21 @@ export default async function DashboardPage() {
       {/* Quick actions */}
       <div className="flex flex-wrap gap-2">
         <CreateTaskDialog clients={clients ?? []} projects={projects ?? []} defaultDate={today}
-          trigger={<button className="group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border bg-card hover:bg-primary/5 hover:border-primary/30 hover:shadow-sm transition-all duration-150 cursor-pointer"><Plus className="h-3.5 w-3.5 text-primary transition-transform duration-150 group-hover:rotate-90" />Nova tarefa</button>}
+          trigger={<button className="group flex h-9 cursor-pointer items-center gap-1.5 rounded-md border border-foreground/30 bg-card px-3 text-[11px] font-semibold transition-all duration-150 hover:border-foreground hover:bg-foreground hover:text-background"><Plus className="h-3.5 w-3.5 transition-transform duration-150 group-hover:rotate-90" />Nova tarefa</button>}
         />
         <CreateProjectDialog clients={clients ?? []}
-          trigger={<button className="group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border bg-card hover:bg-primary/5 hover:border-primary/30 hover:shadow-sm transition-all duration-150 cursor-pointer"><Plus className="h-3.5 w-3.5 text-primary transition-transform duration-150 group-hover:rotate-90" />Novo projeto</button>}
+          trigger={<button className="group flex h-9 cursor-pointer items-center gap-1.5 rounded-md border border-foreground/30 bg-card px-3 text-[11px] font-semibold transition-all duration-150 hover:border-foreground hover:bg-foreground hover:text-background"><Plus className="h-3.5 w-3.5 transition-transform duration-150 group-hover:rotate-90" />Novo projeto</button>}
         />
         <CreateFinanceDialog clients={clients ?? []} projects={projects ?? []}
-          trigger={<button className="group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border bg-card hover:bg-primary/5 hover:border-primary/30 hover:shadow-sm transition-all duration-150 cursor-pointer"><Plus className="h-3.5 w-3.5 text-primary transition-transform duration-150 group-hover:rotate-90" />Novo lançamento</button>}
+          trigger={<button className="group flex h-9 cursor-pointer items-center gap-1.5 rounded-md border border-foreground/30 bg-card px-3 text-[11px] font-semibold transition-all duration-150 hover:border-foreground hover:bg-foreground hover:text-background"><Plus className="h-3.5 w-3.5 transition-transform duration-150 group-hover:rotate-90" />Novo lançamento</button>}
         />
         <CreateNoteDialog
-          trigger={<button className="group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border bg-card hover:bg-primary/5 hover:border-primary/30 hover:shadow-sm transition-all duration-150 cursor-pointer"><Plus className="h-3.5 w-3.5 text-primary transition-transform duration-150 group-hover:rotate-90" />Nova nota</button>}
+          trigger={<button className="group flex h-9 cursor-pointer items-center gap-1.5 rounded-md border border-foreground/30 bg-card px-3 text-[11px] font-semibold transition-all duration-150 hover:border-foreground hover:bg-foreground hover:text-background"><Plus className="h-3.5 w-3.5 transition-transform duration-150 group-hover:rotate-90" />Nova nota</button>}
         />
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
         <StatCard
           label="Tarefas hoje" value={todayTasks.length} icon={CheckSquare}
           variant={todayTasks.length > 0 ? 'primary' : 'default'} href="/app/tarefas"

@@ -53,11 +53,11 @@ export function FinanceCard({ entry, onEdit, onChanged }: FinanceCardProps) {
       <div className="group flex items-center gap-3 p-3.5 rounded-xl border bg-card hover:shadow-sm transition-all duration-150">
         <div className={cn(
           'h-8 w-8 rounded-lg flex items-center justify-center shrink-0',
-          isIncome ? 'bg-green-50' : 'bg-red-50'
+          isIncome ? 'bg-foreground text-background' : 'border bg-background text-foreground'
         )}>
           {isIncome
-            ? <TrendingUp className="h-4 w-4 text-green-600" />
-            : <TrendingDown className="h-4 w-4 text-red-500" />}
+            ? <TrendingUp className="h-4 w-4" />
+            : <TrendingDown className="h-4 w-4" />}
         </div>
 
         <div className="flex-1 min-w-0">
@@ -77,7 +77,7 @@ export function FinanceCard({ entry, onEdit, onChanged }: FinanceCardProps) {
 
         <div className="flex items-center gap-2 shrink-0">
           <div className="text-right">
-            <p className={cn('text-sm font-semibold', isIncome ? 'text-green-600' : 'text-red-500')}>
+            <p className="text-sm font-semibold text-foreground">
               {isIncome ? '+' : '-'}{formatCurrency(entry.amount)}
             </p>
             <Badge variant={statusVariants[entry.status]} className="text-[10px] mt-0.5">

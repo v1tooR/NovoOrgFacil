@@ -14,9 +14,9 @@ const COLUMNS: {
   headerBg: string
   emptyText: string
 }[] = [
-  { status: 'pending', label: 'A fazer', dot: 'bg-slate-400', ring: 'ring-slate-300', headerBg: 'bg-slate-400/10', emptyText: 'Nada pendente por aqui.' },
-  { status: 'in_progress', label: 'Em andamento', dot: 'bg-blue-500', ring: 'ring-blue-400', headerBg: 'bg-blue-500/10', emptyText: 'Nada em andamento.' },
-  { status: 'completed', label: 'Concluída', dot: 'bg-green-500', ring: 'ring-green-400', headerBg: 'bg-green-500/10', emptyText: 'Nada concluído ainda.' },
+  { status: 'pending', label: 'A fazer', dot: 'bg-foreground/25', ring: 'ring-foreground/30', headerBg: 'bg-background', emptyText: 'Nada pendente por aqui.' },
+  { status: 'in_progress', label: 'Em andamento', dot: 'bg-foreground/60', ring: 'ring-foreground/60', headerBg: 'bg-foreground/10', emptyText: 'Nada em andamento.' },
+  { status: 'completed', label: 'Concluída', dot: 'bg-foreground', ring: 'ring-foreground', headerBg: 'bg-foreground text-background', emptyText: 'Nada concluído ainda.' },
 ]
 
 interface KanbanBoardProps {

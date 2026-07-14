@@ -22,8 +22,8 @@ export function MobileBottomNav() {
   }
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border safe-area-pb">
-      <div className="flex items-center justify-around h-16 px-2">
+    <nav className="safe-area-pb fixed bottom-3 left-3 right-3 z-50 overflow-hidden rounded-xl border border-white/15 bg-sidebar text-sidebar-foreground shadow-2xl lg:hidden">
+      <div className="flex h-16 items-center justify-around px-1">
         {navItems.map((item) => {
           const Icon = item.icon
           const active = isActive(item.href, item.exact)
@@ -32,14 +32,16 @@ export function MobileBottomNav() {
               key={item.href}
               href={item.href}
               className={cn(
-                'flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all min-w-0',
-                active ? 'text-primary' : 'text-muted-foreground'
+                'relative flex min-w-0 flex-1 flex-col items-center gap-1 px-1 py-2 text-sidebar-foreground/45 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white',
+                active && 'text-sidebar-foreground'
               )}
+              aria-current={active ? 'page' : undefined}
             >
               <Icon className={cn('h-5 w-5 shrink-0', active && 'stroke-[2.5]')} />
               <span className={cn('text-[10px] font-medium truncate', active && 'font-semibold')}>
                 {item.label}
               </span>
+              <span className={cn('absolute bottom-0 h-px w-5 bg-white transition-opacity', active ? 'opacity-100' : 'opacity-0')} />
             </Link>
           )
         })}
