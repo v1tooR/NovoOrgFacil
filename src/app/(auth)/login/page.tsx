@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2, Eye, EyeOff } from 'lucide-react'
+import { ArrowRight, Eye, EyeOff, Loader2, LockKeyhole } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
@@ -27,26 +27,46 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="space-y-6 animate-fade-in">
-      <div className="space-y-1.5">
-        <h1 className="text-2xl font-bold tracking-tight">Bom ter você de volta</h1>
-        <p className="text-sm text-muted-foreground">Entre com seu e-mail e senha para acessar.</p>
+    <div className="animate-fade-in">
+      <header className="mb-8 border-b border-foreground/15 pb-6">
+        <div className="mb-5 flex items-center justify-between gap-4">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            Acesso / Workspace
+          </p>
+          <span className="border border-foreground/20 px-2 py-1 text-[9px] uppercase tracking-wider text-muted-foreground">
+            Área segura
+          </span>
+        </div>
+        <h1 className="text-3xl font-bold leading-none tracking-[-0.06em] sm:text-4xl">
+          Bem-vindo de volta.
+        </h1>
+        <p className="mt-3 max-w-sm text-xs leading-relaxed text-muted-foreground sm:text-sm">
+          Entre com seus dados para continuar organizando seu trabalho.
+        </p>
+      </header>
+
+      <div className="mb-5 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+        <LockKeyhole className="h-3.5 w-3.5" />
+        Suas credenciais são protegidas
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>E-mail</FormLabel>
+              <FormItem className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <FormLabel className="text-[10px] font-semibold uppercase tracking-[0.16em]">E-mail</FormLabel>
+                  <span className="text-[9px] tabular-nums text-muted-foreground">01</span>
+                </div>
                 <FormControl>
                   <Input
                     type="email"
                     placeholder="seu@email.com"
                     autoComplete="email"
-                    className="h-10"
+                    className="h-12 rounded-none border-foreground/25 bg-card px-4 focus-visible:border-foreground"
                     {...field}
                   />
                 </FormControl>
@@ -59,46 +79,49 @@ export default function LoginPage() {
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <FormLabel>Senha</FormLabel>
-                  <Link href="/forgot-password" className="text-xs text-primary hover:underline">
+                  <div className="flex items-center gap-3">
+                    <FormLabel className="text-[10px] font-semibold uppercase tracking-[0.16em]">Senha</FormLabel>
+                    <span className="text-[9px] tabular-nums text-muted-foreground">02</span>
+                  </div>
+                  <Link href="/forgot-password" className="text-[10px] font-medium underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                     Esqueci a senha
                   </Link>
                 </div>
-                <FormControl>
-                  <div className="relative">
+                <div className="relative">
+                  <FormControl>
                     <Input
                       type={showPassword ? 'text' : 'password'}
                       placeholder="••••••••"
                       autoComplete="current-password"
-                      className="h-10 pr-10"
+                      className="h-12 rounded-none border-foreground/25 bg-card px-4 pr-12 focus-visible:border-foreground"
                       {...field}
                     />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((v) => !v)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                      tabIndex={-1}
-                    >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </button>
-                  </div>
-                </FormControl>
+                  </FormControl>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((v) => !v)}
+                    className="absolute inset-y-0 right-0 flex w-12 items-center justify-center border-l border-foreground/15 text-muted-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+                    aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
                 <FormMessage />
               </FormItem>
             )}
           />
 
           {error && (
-            <div className="rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">
+            <div role="alert" aria-live="polite" className="border border-dashed border-foreground bg-background px-4 py-3 text-xs font-medium text-foreground">
               {error}
             </div>
           )}
 
           <Button
             type="submit"
-            className="w-full h-10"
+            className="group h-12 w-full rounded-none text-xs uppercase tracking-[0.16em]"
             disabled={form.formState.isSubmitting}
           >
             {form.formState.isSubmitting ? (
@@ -107,18 +130,24 @@ export default function LoginPage() {
                 Entrando...
               </>
             ) : (
-              'Entrar'
+              <>
+                Entrar
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </>
             )}
           </Button>
         </form>
       </Form>
 
-      <p className="text-center text-sm text-muted-foreground">
-        Não tem conta?{' '}
-        <Link href="/register" className="text-primary font-medium hover:underline">
-          Criar conta grátis
+      <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-foreground/15 pt-5 text-xs sm:flex-row">
+        <span className="text-muted-foreground">Primeiro acesso por aqui?</span>
+        <Link
+          href="/register"
+          className="inline-flex items-center gap-2 font-semibold underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          Criar conta grátis <ArrowRight className="h-3.5 w-3.5" />
         </Link>
-      </p>
+      </div>
     </div>
   )
 }
