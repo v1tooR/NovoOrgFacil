@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { FREELANCER_ONLY_ERROR, hasFreelancerAccess } from '@/lib/supabase/access'
 import { clientSchema, type ClientInput } from '@/lib/validations/clients'
 
 export async function createClient_(data: ClientInput) {
@@ -11,6 +12,7 @@ export async function createClient_(data: ClientInput) {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Não autorizado.' }
+  if (!(await hasFreelancerAccess(supabase, user.id))) return { error: FREELANCER_ONLY_ERROR }
 
   const { error } = await supabase.from('clients').insert({
     ...validated.data,
@@ -35,6 +37,7 @@ export async function updateClient(id: string, data: ClientInput) {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Não autorizado.' }
+  if (!(await hasFreelancerAccess(supabase, user.id))) return { error: FREELANCER_ONLY_ERROR }
 
   const { error } = await supabase
     .from('clients')
@@ -52,6 +55,7 @@ export async function deleteClient(id: string) {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Não autorizado.' }
+  if (!(await hasFreelancerAccess(supabase, user.id))) return { error: FREELANCER_ONLY_ERROR }
 
   const { error } = await supabase
     .from('clients')

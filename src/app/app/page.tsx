@@ -25,6 +25,15 @@ export default async function DashboardPage() {
   const monthStart = format(startOfMonth(new Date()), 'yyyy-MM-dd')
   const monthEnd = format(endOfMonth(new Date()), 'yyyy-MM-dd')
 
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('full_name, account_type')
+    .eq('id', user.id)
+    .single()
+
+  const isFreelancer = profile?.account_type === 'freelancer'
+  const emptyProfessionalResult = Promise.resolve({ data: [] })
+
   const [
     { data: tasks },
     { data: activeProjects },
@@ -32,19 +41,23 @@ export default async function DashboardPage() {
     { data: recentNotes },
     { data: clients },
     { data: projects },
-    { data: profile },
   ] = await Promise.all([
-    supabase.from('tasks').select('*, project:projects(id,name), client:clients(id,name)')
-      .neq('status', 'completed').order('due_date', { ascending: true }).limit(20),
-    supabase.from('projects').select('*, client:clients(id,name)')
-      .in('status', ['in_progress', 'planning']).order('created_at', { ascending: false }).limit(4),
+    isFreelancer
+      ? supabase.from('tasks').select('*, project:projects(id,name), client:clients(id,name)')
+          .neq('status', 'completed').order('due_date', { ascending: true }).limit(20)
+      : supabase.from('tasks').select('*')
+          .neq('status', 'completed').order('due_date', { ascending: true }).limit(20),
+    isFreelancer
+      ? supabase.from('projects').select('*, client:clients(id,name)')
+          .in('status', ['in_progress', 'planning']).order('created_at', { ascending: false }).limit(4)
+      : emptyProfessionalResult,
     supabase.from('financial_entries').select('*')
       .gte('due_date', monthStart).lte('due_date', monthEnd),
     supabase.from('quick_notes').select('*')
+      .eq('is_archived', false)
       .order('is_pinned', { ascending: false }).order('created_at', { ascending: false }).limit(4),
-    supabase.from('clients').select('*').order('name'),
-    supabase.from('projects').select('*').order('name'),
-    supabase.from('profiles').select('full_name').eq('id', user.id).single(),
+    isFreelancer ? supabase.from('clients').select('*').order('name') : emptyProfessionalResult,
+    isFreelancer ? supabase.from('projects').select('*').order('name') : emptyProfessionalResult,
   ])
 
   const todayTasks = (tasks ?? []).filter((t: Task) => t.due_date === today)
@@ -94,9 +107,11 @@ export default async function DashboardPage() {
         <CreateTaskDialog clients={clients ?? []} projects={projects ?? []} defaultDate={today}
           trigger={<button className="group flex h-9 cursor-pointer items-center gap-1.5 rounded-md border border-foreground/30 bg-card px-3 text-[11px] font-semibold transition-all duration-150 hover:border-foreground hover:bg-foreground hover:text-background"><Plus className="h-3.5 w-3.5 transition-transform duration-150 group-hover:rotate-90" />Nova tarefa</button>}
         />
-        <CreateProjectDialog clients={clients ?? []}
-          trigger={<button className="group flex h-9 cursor-pointer items-center gap-1.5 rounded-md border border-foreground/30 bg-card px-3 text-[11px] font-semibold transition-all duration-150 hover:border-foreground hover:bg-foreground hover:text-background"><Plus className="h-3.5 w-3.5 transition-transform duration-150 group-hover:rotate-90" />Novo projeto</button>}
-        />
+        {isFreelancer && (
+          <CreateProjectDialog clients={clients ?? []}
+            trigger={<button className="group flex h-9 cursor-pointer items-center gap-1.5 rounded-md border border-foreground/30 bg-card px-3 text-[11px] font-semibold transition-all duration-150 hover:border-foreground hover:bg-foreground hover:text-background"><Plus className="h-3.5 w-3.5 transition-transform duration-150 group-hover:rotate-90" />Novo projeto</button>}
+          />
+        )}
         <CreateFinanceDialog clients={clients ?? []} projects={projects ?? []}
           trigger={<button className="group flex h-9 cursor-pointer items-center gap-1.5 rounded-md border border-foreground/30 bg-card px-3 text-[11px] font-semibold transition-all duration-150 hover:border-foreground hover:bg-foreground hover:text-background"><Plus className="h-3.5 w-3.5 transition-transform duration-150 group-hover:rotate-90" />Novo lançamento</button>}
         />
@@ -117,11 +132,13 @@ export default async function DashboardPage() {
           variant={overdueTasks.length > 0 ? 'destructive' : 'default'} href="/app/tarefas"
           style={{ animationDelay: '60ms' }} className="animate-fade-in"
         />
-        <StatCard
-          label="Projetos ativos" value={activeProjects?.length ?? 0} icon={FolderKanban}
-          variant="default" href="/app/projetos"
-          style={{ animationDelay: '120ms' }} className="animate-fade-in"
-        />
+        {isFreelancer && (
+          <StatCard
+            label="Projetos ativos" value={activeProjects?.length ?? 0} icon={FolderKanban}
+            variant="default" href="/app/projetos"
+            style={{ animationDelay: '120ms' }} className="animate-fade-in"
+          />
+        )}
         <StatCard
           label="Saldo do mês" value={formatCurrency(balance)} icon={Wallet}
           variant={balance >= 0 ? 'success' : 'destructive'} description={`${formatCurrency(pending)} pendente`}
@@ -172,6 +189,7 @@ export default async function DashboardPage() {
         {/* Right column */}
         <div className="space-y-6">
           {/* Active Projects */}
+          {isFreelancer && (
           <section>
             <h2 className="font-semibold text-sm mb-3">Projetos em andamento</h2>
             {(activeProjects?.length ?? 0) === 0 ? (
@@ -206,6 +224,7 @@ export default async function DashboardPage() {
               </div>
             )}
           </section>
+          )}
 
           {/* Financial summary */}
           <section>

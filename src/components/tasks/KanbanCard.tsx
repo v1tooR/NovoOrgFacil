@@ -112,7 +112,7 @@ export function KanbanCard({ task, onEdit, onDelete, dragging, preview }: Kanban
                 )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
-                  className="text-destructive focus:text-destructive"
+                  variant="destructive"
                   onClick={() => setDeleteOpen(true)}
                 >
                   <Trash2 className="h-4 w-4" /> Excluir

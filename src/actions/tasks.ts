@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { hasFreelancerAccess } from '@/lib/supabase/access'
 import { taskSchema, type TaskInput } from '@/lib/validations/tasks'
 
 export async function createTask(data: TaskInput) {
@@ -14,13 +15,17 @@ export async function createTask(data: TaskInput) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Não autorizado.' }
 
+  const requestedProfessionalLink = Boolean(validated.data.client_id || validated.data.project_id)
+  const canUseProfessionalLinks = !requestedProfessionalLink
+    || await hasFreelancerAccess(supabase, user.id)
+
   const { error } = await supabase.from('tasks').insert({
     ...validated.data,
     user_id: user.id,
     due_date: validated.data.due_date || null,
     due_time: validated.data.due_time || null,
-    project_id: validated.data.project_id || null,
-    client_id: validated.data.client_id || null,
+    project_id: canUseProfessionalLinks ? validated.data.project_id || null : null,
+    client_id: canUseProfessionalLinks ? validated.data.client_id || null : null,
   })
 
   if (error) return { error: 'Erro ao criar tarefa. Tente novamente.' }
@@ -40,12 +45,19 @@ export async function updateTask(id: string, data: Partial<TaskInput>) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Não autorizado.' }
 
+  const requestedProfessionalLink = Boolean(validated.data.client_id || validated.data.project_id)
+  const canUseProfessionalLinks = !requestedProfessionalLink
+    || await hasFreelancerAccess(supabase, user.id)
+
   // Only touch fields that were actually provided, and normalize the empty
   // strings the form sends for optional fields into real NULLs.
   const patch: Record<string, unknown> = { updated_at: new Date().toISOString() }
   const nullable = ['due_date', 'due_time', 'project_id', 'client_id'] as const
   for (const [key, value] of Object.entries(validated.data)) {
-    patch[key] = nullable.includes(key as (typeof nullable)[number]) ? (value || null) : value
+    const isProfessionalLink = key === 'project_id' || key === 'client_id'
+    patch[key] = isProfessionalLink && !canUseProfessionalLinks
+      ? null
+      : nullable.includes(key as (typeof nullable)[number]) ? (value || null) : value
   }
 
   const { error } = await supabase

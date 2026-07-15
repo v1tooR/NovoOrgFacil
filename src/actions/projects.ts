@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { FREELANCER_ONLY_ERROR, hasFreelancerAccess } from '@/lib/supabase/access'
 import { projectSchema, type ProjectInput } from '@/lib/validations/projects'
 import type { ProjectPhase, ProjectStatus } from '@/types'
 
@@ -12,6 +13,7 @@ export async function createProject(data: ProjectInput) {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Não autorizado.' }
+  if (!(await hasFreelancerAccess(supabase, user.id))) return { error: FREELANCER_ONLY_ERROR }
 
   const { error } = await supabase.from('projects').insert({
     ...validated.data,
@@ -35,6 +37,7 @@ export async function updateProject(id: string, data: ProjectInput) {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Não autorizado.' }
+  if (!(await hasFreelancerAccess(supabase, user.id))) return { error: FREELANCER_ONLY_ERROR }
 
   const { error } = await supabase
     .from('projects')
@@ -56,6 +59,7 @@ export async function updateProjectStatus(id: string, status: ProjectStatus) {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Não autorizado.' }
+  if (!(await hasFreelancerAccess(supabase, user.id))) return { error: FREELANCER_ONLY_ERROR }
 
   const { error } = await supabase
     .from('projects')
@@ -81,6 +85,7 @@ export async function updateProjectPhases(id: string, phases: ProjectPhase[]) {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Não autorizado.' }
+  if (!(await hasFreelancerAccess(supabase, user.id))) return { error: FREELANCER_ONLY_ERROR }
 
   const { error } = await supabase
     .from('projects')
@@ -98,6 +103,7 @@ export async function deleteProject(id: string) {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Não autorizado.' }
+  if (!(await hasFreelancerAccess(supabase, user.id))) return { error: FREELANCER_ONLY_ERROR }
 
   const { error } = await supabase
     .from('projects')

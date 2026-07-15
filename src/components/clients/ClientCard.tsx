@@ -48,7 +48,7 @@ export function ClientCard({ client, onEdit }: ClientCardProps) {
                 </DropdownMenuItem>
               )}
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => setDeleteOpen(true)}>
+              <DropdownMenuItem variant="destructive" onClick={() => setDeleteOpen(true)}>
                 <Trash2 className="h-4 w-4" /> Excluir
               </DropdownMenuItem>
             </DropdownMenuContent>

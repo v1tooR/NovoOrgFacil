@@ -13,6 +13,7 @@ import { EmptyState } from '@/components/shared/EmptyState'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { useToast } from '@/components/ui/use-toast'
+import { useAccountType } from '@/components/providers/AccountTypeProvider'
 import { updateTask, deleteTask } from '@/actions/tasks'
 import { isOverdue } from '@/lib/utils'
 import type { Task, Client, Project, TaskStatus } from '@/types'
@@ -27,6 +28,7 @@ export default function TarefasPage() {
   const [editTask, setEditTask] = useState<Task | null>(null)
   const [view, setView] = useState<TaskView>('list')
   const { toast } = useToast()
+  const { isFreelancer } = useAccountType()
 
   useEffect(() => {
     const stored = typeof window !== 'undefined' ? window.localStorage.getItem(VIEW_STORAGE_KEY) : null
@@ -42,20 +44,28 @@ export default function TarefasPage() {
   // (which we fetch once on mount) never goes stale until a full navigation.
   const loadTasks = useCallback(async () => {
     const supabase = createClient()
-    const { data } = await supabase
-      .from('tasks')
-      .select('*, project:projects(id,name), client:clients(id,name)')
-      .order('due_date', { ascending: true })
+    const { data } = isFreelancer
+      ? await supabase.from('tasks')
+          .select('*, project:projects(id,name), client:clients(id,name)')
+          .order('due_date', { ascending: true })
+      : await supabase.from('tasks').select('*').order('due_date', { ascending: true })
     setTasks((data ?? []) as Task[])
-  }, [])
+  }, [isFreelancer])
 
   useEffect(() => {
     async function load() {
       const supabase = createClient()
       const [{ data: tasksData }, { data: clientsData }, { data: projectsData }] = await Promise.all([
-        supabase.from('tasks').select('*, project:projects(id,name), client:clients(id,name)').order('due_date', { ascending: true }),
-        supabase.from('clients').select('*').order('name'),
-        supabase.from('projects').select('*').order('name'),
+        isFreelancer
+          ? supabase.from('tasks').select('*, project:projects(id,name), client:clients(id,name)')
+              .order('due_date', { ascending: true })
+          : supabase.from('tasks').select('*').order('due_date', { ascending: true }),
+        isFreelancer
+          ? supabase.from('clients').select('*').order('name')
+          : Promise.resolve({ data: [] }),
+        isFreelancer
+          ? supabase.from('projects').select('*').order('name')
+          : Promise.resolve({ data: [] }),
       ])
       setTasks((tasksData ?? []) as Task[])
       setClients((clientsData ?? []) as Client[])
@@ -63,7 +73,7 @@ export default function TarefasPage() {
       setLoading(false)
     }
     load()
-  }, [])
+  }, [isFreelancer])
 
   // Optimistic status change shared by the list checkbox and the Kanban drag.
   const handleStatusChange = useCallback((taskId: string, status: TaskStatus) => {

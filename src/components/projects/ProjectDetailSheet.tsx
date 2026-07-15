@@ -142,7 +142,7 @@ export function ProjectDetailSheet({ project, clients, open, onOpenChange }: Pro
       const supabase = createClient()
       const [{ data: t }, { data: n }, { data: e }] = await Promise.all([
         supabase.from('tasks').select('*').eq('project_id', project.id).order('due_date', { ascending: true }),
-        supabase.from('quick_notes').select('*').eq('project_id', project.id).order('created_at', { ascending: false }),
+        supabase.from('quick_notes').select('*').eq('project_id', project.id).eq('is_archived', false).order('created_at', { ascending: false }),
         supabase.from('financial_entries').select('*').eq('project_id', project.id),
       ])
       if (!active) return
@@ -254,11 +254,20 @@ export function ProjectDetailSheet({ project, clients, open, onOpenChange }: Pro
   async function saveNote() {
     const title = noteTitle.trim()
     if (!title) return
-    const res = await createNote({ title, content: noteContent.trim() || null, is_pinned: false, project_id: project.id, client_id: project.client_id })
+    const res = await createNote({
+      title,
+      content: noteContent.trim() || null,
+      is_pinned: false,
+      tags: [],
+      note_color: 'default',
+      is_archived: false,
+      project_id: project.id,
+      client_id: project.client_id,
+    })
     if (res?.error) { toast({ title: 'Erro', description: res.error, variant: 'destructive' }); return }
     setNoteTitle(''); setNoteContent(''); setAddingNote(false)
     const supabase = createClient()
-    const { data } = await supabase.from('quick_notes').select('*').eq('project_id', project.id).order('created_at', { ascending: false })
+    const { data } = await supabase.from('quick_notes').select('*').eq('project_id', project.id).eq('is_archived', false).order('created_at', { ascending: false })
     setNotes((data ?? []) as QuickNote[])
   }
   async function removeNote(id: string) {

@@ -1,11 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { MoreHorizontal, Pencil, Trash2, TrendingUp, TrendingDown, CheckCircle2, Loader2 } from 'lucide-react'
+import { MoreHorizontal, Pencil, Trash2, TrendingUp, TrendingDown, CheckCircle2, CreditCard, Loader2, Repeat2 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent, DropdownMenuLabel } from '@/components/ui/dropdown-menu'
 import { ConfirmDeleteDialog } from '@/components/shared/ConfirmDeleteDialog'
-import { deleteFinancialEntry, updateFinancialEntryStatus } from '@/actions/finance'
+import { deleteFinancialEntry, deleteFinancialSeries, updateFinancialEntryStatus } from '@/actions/finance'
 import { useToast } from '@/components/ui/use-toast'
 import { cn, formatCurrency, formatDate, FINANCIAL_STATUS_LABELS } from '@/lib/utils'
 import type { FinancialEntry, FinancialStatus } from '@/types'
@@ -30,7 +30,7 @@ interface FinanceCardProps {
 }
 
 export function FinanceCard({ entry, onEdit, onChanged }: FinanceCardProps) {
-  const [deleteOpen, setDeleteOpen] = useState(false)
+  const [deleteTarget, setDeleteTarget] = useState<'entry' | 'series' | null>(null)
   const [updating, setUpdating] = useState(false)
   const { toast } = useToast()
   const isIncome = entry.type === 'income'
@@ -66,6 +66,14 @@ export function FinanceCard({ entry, onEdit, onChanged }: FinanceCardProps) {
             <span className="max-w-full truncate text-xs text-muted-foreground">{entry.category}</span>
             <span className="text-muted-foreground">·</span>
             <span className="text-xs text-muted-foreground">{formatDate(entry.due_date)}</span>
+            {entry.series_type && entry.series_number && entry.series_count && (
+              <span className="inline-flex items-center gap-1 rounded-full border px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+                {entry.series_type === 'installment'
+                  ? <CreditCard className="h-3 w-3" />
+                  : <Repeat2 className="h-3 w-3" />}
+                {entry.series_type === 'installment' ? 'Parcela' : 'Recorrência'} {entry.series_number}/{entry.series_count}
+              </span>
+            )}
             {entry.client && (
               <>
                 <span className="text-muted-foreground">·</span>
@@ -119,20 +127,38 @@ export function FinanceCard({ entry, onEdit, onChanged }: FinanceCardProps) {
                 </DropdownMenuItem>
               )}
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => setDeleteOpen(true)}>
-                <Trash2 className="h-4 w-4" /> Excluir
+              <DropdownMenuItem variant="destructive" onClick={() => setDeleteTarget('entry')}>
+                <Trash2 className="h-4 w-4" /> Excluir lançamento
               </DropdownMenuItem>
+              {entry.series_id && (
+                <DropdownMenuItem variant="destructive" onClick={() => setDeleteTarget('series')}>
+                  <Repeat2 className="h-4 w-4" /> Excluir toda a série
+                </DropdownMenuItem>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </div>
 
       <ConfirmDeleteDialog
-        open={deleteOpen}
-        onOpenChange={setDeleteOpen}
-        title="Excluir lançamento"
-        description={`Tem certeza que deseja excluir "${entry.title}"?`}
-        onConfirm={async () => { await deleteFinancialEntry(entry.id); onChanged?.() }}
+        open={deleteTarget !== null}
+        onOpenChange={(nextOpen) => !nextOpen && setDeleteTarget(null)}
+        title={deleteTarget === 'series' ? 'Excluir toda a série' : 'Excluir lançamento'}
+        description={deleteTarget === 'series'
+          ? `Todas as ${entry.series_count} ocorrências de "${entry.title}" serão excluídas. Esta ação não pode ser desfeita.`
+          : `Somente este lançamento de "${entry.title}" será excluído.`}
+        onConfirm={async () => {
+          const result = deleteTarget === 'series' && entry.series_id
+            ? await deleteFinancialSeries(entry.series_id)
+            : await deleteFinancialEntry(entry.id)
+
+          if (result.error) {
+            toast({ title: 'Erro', description: result.error, variant: 'destructive' })
+            return
+          }
+
+          onChanged?.()
+        }}
       />
     </>
   )

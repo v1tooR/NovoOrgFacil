@@ -3,11 +3,17 @@ export type TaskPriority = 'low' | 'medium' | 'high'
 export type ProjectStatus = 'planning' | 'in_progress' | 'waiting_client' | 'completed' | 'paused'
 export type FinancialType = 'income' | 'expense'
 export type FinancialStatus = 'pending' | 'paid' | 'received' | 'overdue'
+export type FinancialSeriesType = 'installment' | 'recurring'
+export type NoteColor = 'default' | 'yellow' | 'blue' | 'green' | 'rose' | 'purple'
+
+/** 'personal' = plano Pessoal (sem Projetos/Clientes); 'freelancer' = plano Profissional. */
+export type AccountType = 'personal' | 'freelancer'
 
 export interface Profile {
   id: string
   full_name: string | null
   avatar_url: string | null
+  account_type: AccountType
   created_at: string
   updated_at: string
 }
@@ -74,10 +80,22 @@ export interface FinancialEntry {
   paid_at: string | null
   client_id: string | null
   project_id: string | null
+  series_id: string | null
+  series_type: FinancialSeriesType | null
+  series_number: number | null
+  series_count: number | null
   created_at: string
   updated_at: string
   client?: Client | null
   project?: Project | null
+}
+
+export interface FinancialCategory {
+  id: string
+  user_id: string
+  type: FinancialType
+  name: string
+  created_at: string
 }
 
 export interface QuickNote {
@@ -86,6 +104,9 @@ export interface QuickNote {
   title: string
   content: string | null
   is_pinned: boolean
+  tags: string[]
+  note_color: NoteColor
+  is_archived: boolean
   client_id: string | null
   project_id: string | null
   created_at: string

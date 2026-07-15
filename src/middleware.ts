@@ -30,17 +30,42 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   const isAuthRoute = pathname.startsWith('/login') || pathname.startsWith('/register') || pathname.startsWith('/forgot-password')
   const isAppRoute = pathname.startsWith('/app')
+  const matchesRoute = (route: string) => pathname === route || pathname.startsWith(`${route}/`)
+  // Rotas exclusivas do plano Profissional (freelancer).
+  const isFreelancerRoute = matchesRoute('/app/projetos') || matchesRoute('/app/clientes')
+
+  function redirectTo(path: string) {
+    const url = request.nextUrl.clone()
+    url.pathname = path
+    const redirectResponse = NextResponse.redirect(url)
+
+    // Preserva uma eventual renovação de sessão feita por getUser().
+    supabaseResponse.cookies.getAll().forEach(({ name, value, ...options }) => {
+      redirectResponse.cookies.set(name, value, options)
+    })
+
+    return redirectResponse
+  }
 
   if (!user && isAppRoute) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/login'
-    return NextResponse.redirect(url)
+    return redirectTo('/login')
   }
 
   if (user && isAuthRoute) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/app'
-    return NextResponse.redirect(url)
+    return redirectTo('/app')
+  }
+
+  // Gate das áreas Projetos/Clientes: só consulta o perfil nessas rotas.
+  if (user && isFreelancerRoute) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('account_type')
+      .eq('id', user.id)
+      .single()
+
+    if (profile?.account_type !== 'freelancer') {
+      return redirectTo('/app')
+    }
   }
 
   return supabaseResponse

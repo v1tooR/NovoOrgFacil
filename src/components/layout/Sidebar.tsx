@@ -23,8 +23,8 @@ import logo from '@/lib/assets/logo.svg'
 const navItems = [
   { href: '/app', label: 'Dashboard', icon: LayoutDashboard, exact: true },
   { href: '/app/tarefas', label: 'Tarefas', icon: CheckSquare },
-  { href: '/app/projetos', label: 'Projetos', icon: FolderKanban },
-  { href: '/app/clientes', label: 'Clientes', icon: Users },
+  { href: '/app/projetos', label: 'Projetos', icon: FolderKanban, freelancerOnly: true },
+  { href: '/app/clientes', label: 'Clientes', icon: Users, freelancerOnly: true },
   { href: '/app/financeiro', label: 'Financeiro', icon: Wallet },
   { href: '/app/notas', label: 'Notas', icon: StickyNote },
 ]
@@ -36,6 +36,9 @@ interface SidebarProps {
 
 export function Sidebar({ profile, email }: SidebarProps) {
   const pathname = usePathname()
+
+  const isFreelancer = profile?.account_type === 'freelancer'
+  const items = navItems.filter((item) => !item.freelancerOnly || isFreelancer)
 
   function isActive(href: string, exact?: boolean) {
     if (exact) return pathname === href
@@ -55,7 +58,7 @@ export function Sidebar({ profile, email }: SidebarProps) {
       <nav className="scrollbar-thin flex-1 overflow-y-auto px-4 py-6">
         <p className="mb-3 px-3 text-[10px] font-medium uppercase tracking-[0.24em] text-sidebar-foreground/40">Navegação</p>
         <div className="space-y-1">
-        {navItems.map((item, index) => {
+        {items.map((item, index) => {
           const Icon = item.icon
           const active = isActive(item.href, item.exact)
           return (

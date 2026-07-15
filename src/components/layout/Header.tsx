@@ -58,8 +58,8 @@ export function Header({ profile, email }: HeaderProps) {
           </Link>
           <DropdownMenuSeparator />
           <form action={logout}>
-            <DropdownMenuItem asChild>
-              <button type="submit" className="w-full cursor-pointer text-destructive focus:text-destructive">
+            <DropdownMenuItem asChild variant="destructive">
+              <button type="submit" className="w-full cursor-pointer">
                 <LogOut className="h-4 w-4" />
                 Sair
               </button>

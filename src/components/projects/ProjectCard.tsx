@@ -76,7 +76,7 @@ export function ProjectCard({ project, clients = [], taskStats }: ProjectCardPro
                 <Pencil className="h-4 w-4" /> Editar
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => setDeleteOpen(true)}>
+              <DropdownMenuItem variant="destructive" onClick={() => setDeleteOpen(true)}>
                 <Trash2 className="h-4 w-4" /> Excluir
               </DropdownMenuItem>
             </DropdownMenuContent>
