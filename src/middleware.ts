@@ -32,7 +32,7 @@ export async function middleware(request: NextRequest) {
   const isAppRoute = pathname.startsWith('/app')
   const matchesRoute = (route: string) => pathname === route || pathname.startsWith(`${route}/`)
   // Rotas exclusivas do plano Profissional (freelancer).
-  const isFreelancerRoute = matchesRoute('/app/projetos') || matchesRoute('/app/clientes')
+  const isFreelancerRoute = matchesRoute('/app/projetos') || matchesRoute('/app/clientes') || matchesRoute('/app/funil')
 
   function redirectTo(path: string) {
     const url = request.nextUrl.clone()

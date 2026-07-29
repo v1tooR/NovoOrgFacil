@@ -8,6 +8,7 @@ import {
   CheckSquare,
   FolderKanban,
   Users,
+  Filter,
   Wallet,
   StickyNote,
   Settings,
@@ -25,6 +26,7 @@ const navItems = [
   { href: '/app/tarefas', label: 'Tarefas', icon: CheckSquare },
   { href: '/app/projetos', label: 'Projetos', icon: FolderKanban, freelancerOnly: true },
   { href: '/app/clientes', label: 'Clientes', icon: Users, freelancerOnly: true },
+  { href: '/app/funil', label: 'Funil', icon: Filter, freelancerOnly: true },
   { href: '/app/financeiro', label: 'Financeiro', icon: Wallet },
   { href: '/app/notas', label: 'Notas', icon: StickyNote },
 ]

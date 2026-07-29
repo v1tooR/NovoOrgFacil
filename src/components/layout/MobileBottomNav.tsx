@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, CheckSquare, FolderKanban, Wallet, StickyNote } from 'lucide-react'
+import { LayoutDashboard, CheckSquare, FolderKanban, Filter, Wallet, StickyNote } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { AccountType } from '@/types'
 
@@ -10,6 +10,7 @@ const navItems = [
   { href: '/app', label: 'Início', icon: LayoutDashboard, exact: true },
   { href: '/app/tarefas', label: 'Tarefas', icon: CheckSquare },
   { href: '/app/projetos', label: 'Projetos', icon: FolderKanban, freelancerOnly: true },
+  { href: '/app/funil', label: 'Funil', icon: Filter, freelancerOnly: true },
   { href: '/app/financeiro', label: 'Financeiro', icon: Wallet },
   { href: '/app/notas', label: 'Notas', icon: StickyNote },
 ]

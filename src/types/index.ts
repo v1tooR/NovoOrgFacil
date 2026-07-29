@@ -3,6 +3,7 @@ export type TaskPriority = 'low' | 'medium' | 'high'
 export type ProjectStatus = 'planning' | 'in_progress' | 'waiting_client' | 'completed' | 'paused'
 export type FinancialType = 'income' | 'expense'
 export type FinancialStatus = 'pending' | 'paid' | 'received' | 'overdue'
+export type LeadStage = 'new' | 'contacted' | 'proposal' | 'negotiation' | 'won' | 'lost'
 export type FinancialSeriesType = 'installment' | 'recurring'
 export type NoteColor = 'default' | 'yellow' | 'blue' | 'green' | 'rose' | 'purple'
 
@@ -96,6 +97,26 @@ export interface FinancialCategory {
   type: FinancialType
   name: string
   created_at: string
+}
+
+export interface Lead {
+  id: string
+  user_id: string
+  name: string
+  company: string | null
+  email: string | null
+  phone: string | null
+  source: string | null
+  stage: LeadStage
+  value: number
+  notes: string | null
+  expected_close_date: string | null
+  /** Preenchido quando o lead é convertido em cliente. */
+  client_id: string | null
+  lost_reason: string | null
+  created_at: string
+  updated_at: string
+  client?: Client | null
 }
 
 export interface QuickNote {

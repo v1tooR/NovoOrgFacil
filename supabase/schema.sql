@@ -132,6 +132,26 @@ create table public.quick_notes (
   updated_at timestamptz default now() not null
 );
 
+-- Leads / Funil comercial (CRM) — exclusivo do plano Profissional
+create table public.leads (
+  id uuid default uuid_generate_v4() primary key,
+  user_id uuid references auth.users(id) on delete cascade not null,
+  name text not null,
+  company text,
+  email text,
+  phone text,
+  source text,
+  stage text not null default 'new'
+    check (stage in ('new', 'contacted', 'proposal', 'negotiation', 'won', 'lost')),
+  value numeric(12,2) not null default 0 check (value >= 0),
+  notes text,
+  expected_close_date date,
+  client_id uuid references public.clients(id) on delete set null,
+  lost_reason text,
+  created_at timestamptz default now() not null,
+  updated_at timestamptz default now() not null
+);
+
 -- ============================================================
 -- TRIGGERS — updated_at automático
 -- ============================================================
@@ -160,6 +180,9 @@ create trigger handle_updated_at before update on public.financial_entries
   for each row execute procedure public.handle_updated_at();
 
 create trigger handle_updated_at before update on public.quick_notes
+  for each row execute procedure public.handle_updated_at();
+
+create trigger handle_updated_at before update on public.leads
   for each row execute procedure public.handle_updated_at();
 
 -- ============================================================
@@ -271,6 +294,7 @@ alter table public.tasks enable row level security;
 alter table public.financial_entries enable row level security;
 alter table public.financial_categories enable row level security;
 alter table public.quick_notes enable row level security;
+alter table public.leads enable row level security;
 
 -- ---- PROFILES ----
 create policy "Usuários podem ver apenas o próprio perfil"
@@ -316,6 +340,24 @@ create policy "Profissionais atualizam os próprios projetos"
 
 create policy "Profissionais deletam os próprios projetos"
   on public.projects for delete
+  using ((select auth.uid()) = user_id and (select public.is_freelancer()));
+
+-- ---- LEADS / FUNIL (plano Profissional) ----
+create policy "Profissionais veem os próprios leads"
+  on public.leads for select
+  using ((select auth.uid()) = user_id and (select public.is_freelancer()));
+
+create policy "Profissionais criam os próprios leads"
+  on public.leads for insert
+  with check ((select auth.uid()) = user_id and (select public.is_freelancer()));
+
+create policy "Profissionais atualizam os próprios leads"
+  on public.leads for update
+  using ((select auth.uid()) = user_id and (select public.is_freelancer()))
+  with check ((select auth.uid()) = user_id and (select public.is_freelancer()));
+
+create policy "Profissionais deletam os próprios leads"
+  on public.leads for delete
   using ((select auth.uid()) = user_id and (select public.is_freelancer()));
 
 -- ---- TASKS ----
@@ -412,3 +454,6 @@ create index idx_quick_notes_user_id on public.quick_notes(user_id);
 create index idx_quick_notes_is_pinned on public.quick_notes(is_pinned);
 create index idx_quick_notes_user_archive_updated on public.quick_notes(user_id, is_archived, is_pinned, updated_at desc);
 create index idx_quick_notes_tags on public.quick_notes using gin(tags);
+create index idx_leads_user_id on public.leads(user_id);
+create index idx_leads_stage on public.leads(user_id, stage);
+create index idx_leads_client_id on public.leads(client_id);

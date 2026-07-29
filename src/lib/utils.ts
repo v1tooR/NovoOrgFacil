@@ -8,6 +8,7 @@ import type {
   ProjectStatus,
   FinancialStatus,
   FinancialType,
+  LeadStage,
 } from '@/types'
 
 export function cn(...inputs: ClassValue[]) {
@@ -79,6 +80,29 @@ export const FINANCIAL_STATUS_LABELS: Record<FinancialStatus, string> = {
   received: 'Recebido',
   overdue: 'Atrasado',
 }
+
+export const LEAD_STAGE_LABELS: Record<LeadStage, string> = {
+  new: 'Novo',
+  contacted: 'Contatado',
+  proposal: 'Proposta',
+  negotiation: 'Negociação',
+  won: 'Ganho',
+  lost: 'Perdido',
+}
+
+/** Ordem das colunas do funil, da entrada à conversão. */
+export const LEAD_STAGES: LeadStage[] = ['new', 'contacted', 'proposal', 'negotiation', 'won', 'lost']
+
+export const LEAD_SOURCES = [
+  'Indicação',
+  'Instagram',
+  'WhatsApp',
+  'Site',
+  'Google',
+  'Evento',
+  'Anúncio',
+  'Outros',
+]
 
 export const INCOME_CATEGORIES = [
   'Serviço prestado',
