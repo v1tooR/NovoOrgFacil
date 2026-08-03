@@ -5,6 +5,8 @@ export type FinancialType = 'income' | 'expense'
 export type FinancialStatus = 'pending' | 'paid' | 'received' | 'overdue'
 export type LeadStage = 'new' | 'contacted' | 'proposal' | 'negotiation' | 'won' | 'lost'
 export type FinancialSeriesType = 'installment' | 'recurring'
+export type SubscriptionCycle = 'weekly' | 'monthly' | 'quarterly' | 'semiannual' | 'yearly'
+export type SubscriptionStatus = 'active' | 'paused' | 'canceled'
 export type NoteColor = 'default' | 'yellow' | 'blue' | 'green' | 'rose' | 'purple'
 
 /** 'personal' = plano Pessoal (sem Projetos/Clientes); 'freelancer' = plano Profissional. */
@@ -85,6 +87,30 @@ export interface FinancialEntry {
   series_type: FinancialSeriesType | null
   series_number: number | null
   series_count: number | null
+  /** Preenchido quando o lançamento nasceu do pagamento de uma assinatura. */
+  subscription_id: string | null
+  created_at: string
+  updated_at: string
+  client?: Client | null
+  project?: Project | null
+}
+
+export interface Subscription {
+  id: string
+  user_id: string
+  name: string
+  description: string | null
+  amount: number
+  cycle: SubscriptionCycle
+  category: string
+  payment_method: string | null
+  status: SubscriptionStatus
+  /** Data da próxima cobrança prevista (yyyy-MM-dd). */
+  next_charge_date: string
+  started_at: string | null
+  canceled_at: string | null
+  client_id: string | null
+  project_id: string | null
   created_at: string
   updated_at: string
   client?: Client | null

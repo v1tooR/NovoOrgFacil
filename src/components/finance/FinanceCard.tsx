@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { MoreHorizontal, Pencil, Trash2, TrendingUp, TrendingDown, CheckCircle2, CreditCard, Loader2, Repeat2 } from 'lucide-react'
+import { MoreHorizontal, Pencil, Trash2, TrendingUp, TrendingDown, CheckCircle2, CreditCard, Loader2, Repeat, Repeat2 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent, DropdownMenuLabel } from '@/components/ui/dropdown-menu'
 import { ConfirmDeleteDialog } from '@/components/shared/ConfirmDeleteDialog'
@@ -72,6 +72,11 @@ export function FinanceCard({ entry, onEdit, onChanged }: FinanceCardProps) {
                   ? <CreditCard className="h-3 w-3" />
                   : <Repeat2 className="h-3 w-3" />}
                 {entry.series_type === 'installment' ? 'Parcela' : 'Recorrência'} {entry.series_number}/{entry.series_count}
+              </span>
+            )}
+            {entry.subscription_id && (
+              <span className="inline-flex items-center gap-1 rounded-full border px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+                <Repeat className="h-3 w-3" />Assinatura
               </span>
             )}
             {entry.client && (

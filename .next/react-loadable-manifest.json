@@ -2,8 +2,22 @@
   "components\\finance\\ExpenseByCategoryChartLazy.tsx -> ./ExpenseByCategoryChart": {
     "id": 36299,
     "files": [
-      "static/chunks/469.dc7d24fd97aa752f.js",
-      "static/chunks/299.d7971b7ffc4dc23a.js"
+      "static/chunks/6146.2fe0ff86c53843f0.js",
+      "static/chunks/6299.84f5238cb00fd768.js"
+    ]
+  },
+  "components\\finance\\FinancialAnalyticsLazy.tsx -> ./FinancialAnalytics": {
+    "id": 24586,
+    "files": [
+      "static/chunks/6146.2fe0ff86c53843f0.js",
+      "static/chunks/8112.7616855f1f82aef6.js",
+      "static/chunks/4586.6621391b67844076.js"
+    ]
+  },
+  "components\\finance\\SubscriptionsPanelLazy.tsx -> ./SubscriptionsPanel": {
+    "id": 54365,
+    "files": [
+      "static/chunks/4365.df1d328ead308559.js"
     ]
   }
 }

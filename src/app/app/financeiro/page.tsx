@@ -2,13 +2,14 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { BarChart3, List, Wallet, TrendingUp, TrendingDown, Clock } from 'lucide-react'
+import { BarChart3, List, Wallet, TrendingUp, TrendingDown, Clock, Repeat } from 'lucide-react'
 import { format, startOfMonth, endOfMonth, subMonths, addMonths } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { PageTitle } from '@/components/shared/PageTitle'
 import { FinanceCard } from '@/components/finance/FinanceCard'
 import { CreateFinanceDialog } from '@/components/finance/CreateFinanceDialog'
 import { FinancialAnalytics } from '@/components/finance/FinancialAnalyticsLazy'
+import { SubscriptionsPanel } from '@/components/finance/SubscriptionsPanelLazy'
 import { StatCard } from '@/components/shared/StatCard'
 import { EmptyState } from '@/components/shared/EmptyState'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -24,7 +25,7 @@ export default function FinanceiroPage() {
   const [clients, setClients] = useState<Client[]>([])
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
-  const [section, setSection] = useState<'entries' | 'analytics'>('entries')
+  const [section, setSection] = useState<'entries' | 'subscriptions' | 'analytics'>('entries')
   const [analyticsEntries, setAnalyticsEntries] = useState<FinancialEntry[]>([])
   const [analyticsLoading, setAnalyticsLoading] = useState(false)
   const [analyticsError, setAnalyticsError] = useState(false)
@@ -119,10 +120,13 @@ export default function FinanceiroPage() {
         <StatCard label="Pendente" value={formatCurrency(pending)} icon={Clock} variant="warning" />
       </div>
 
-      <Tabs value={section} onValueChange={(value) => setSection(value as 'entries' | 'analytics')}>
-        <TabsList className="grid h-auto w-full grid-cols-2 sm:w-auto sm:min-w-[280px]">
+      <Tabs value={section} onValueChange={(value) => setSection(value as 'entries' | 'subscriptions' | 'analytics')}>
+        <TabsList className="grid h-auto w-full grid-cols-3 sm:w-auto sm:min-w-[400px]">
           <TabsTrigger value="entries" className="gap-1.5">
             <List className="h-3.5 w-3.5" />Lançamentos
+          </TabsTrigger>
+          <TabsTrigger value="subscriptions" className="gap-1.5">
+            <Repeat className="h-3.5 w-3.5" />Assinaturas
           </TabsTrigger>
           <TabsTrigger value="analytics" className="gap-1.5">
             <BarChart3 className="h-3.5 w-3.5" />Análises
@@ -157,6 +161,15 @@ export default function FinanceiroPage() {
               </TabsContent>
             </Tabs>
           )}
+        </TabsContent>
+
+        <TabsContent value="subscriptions" className="mt-4">
+          <SubscriptionsPanel
+            clients={clients}
+            projects={projects}
+            monthExpenses={expenses}
+            onChanged={handleFinancialChange}
+          />
         </TabsContent>
 
         <TabsContent value="analytics" className="mt-4">
