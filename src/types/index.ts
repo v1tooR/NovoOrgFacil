@@ -89,6 +89,10 @@ export interface FinancialEntry {
   series_count: number | null
   /** Preenchido quando o lançamento nasceu do pagamento de uma assinatura. */
   subscription_id: string | null
+  /** FITID do extrato OFX — chave de idempotência da importação. */
+  import_fitid: string | null
+  import_source: 'ofx' | null
+  import_account: string | null
   created_at: string
   updated_at: string
   client?: Client | null

@@ -1,4 +1,10 @@
 {
+  "app\\app\\financeiro\\page.tsx -> @/components/finance/EditFinanceDialog": {
+    "id": 38633,
+    "files": [
+      "static/chunks/8633.d5beb8d60046f842.js"
+    ]
+  },
   "components\\finance\\ExpenseByCategoryChartLazy.tsx -> ./ExpenseByCategoryChart": {
     "id": 36299,
     "files": [
@@ -14,10 +20,16 @@
       "static/chunks/4586.6621391b67844076.js"
     ]
   },
-  "components\\finance\\SubscriptionsPanelLazy.tsx -> ./SubscriptionsPanel": {
-    "id": 54365,
+  "components\\finance\\ImportOfxButton.tsx -> ./ImportOfxDialog": {
+    "id": 47017,
     "files": [
-      "static/chunks/4365.df1d328ead308559.js"
+      "static/chunks/7017.81ca61dfd0e14d61.js"
+    ]
+  },
+  "components\\finance\\SubscriptionsPanelLazy.tsx -> ./SubscriptionsPanel": {
+    "id": 81513,
+    "files": [
+      "static/chunks/1513.277bf6da31b92de0.js"
     ]
   }
 }

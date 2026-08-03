@@ -22,21 +22,32 @@ export function formatCurrency(value: number): string {
   }).format(value)
 }
 
+/**
+ * `new Date('2026-08-02')` é interpretado como UTC e, em fusos negativos
+ * (Brasil), volta um dia. Datas puras precisam ser lidas como locais.
+ */
+function toLocalDate(date: string | Date): Date {
+  if (typeof date !== 'string') return date
+  const dateOnly = date.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+  if (!dateOnly) return new Date(date)
+  return new Date(Number(dateOnly[1]), Number(dateOnly[2]) - 1, Number(dateOnly[3]))
+}
+
 export function formatDate(date: string | Date | null, pattern = 'dd/MM/yyyy'): string {
   if (!date) return '—'
-  return format(new Date(date), pattern, { locale: ptBR })
+  return format(toLocalDate(date), pattern, { locale: ptBR })
 }
 
 export function formatDateRelative(date: string | Date | null): string {
   if (!date) return '—'
-  const d = new Date(date)
+  const d = toLocalDate(date)
   if (isToday(d)) return 'Hoje'
   return format(d, "dd 'de' MMM", { locale: ptBR })
 }
 
 export function isOverdue(dueDate: string | null): boolean {
   if (!dueDate) return false
-  return isBefore(startOfDay(new Date(dueDate)), startOfDay(new Date()))
+  return isBefore(startOfDay(toLocalDate(dueDate)), startOfDay(new Date()))
 }
 
 export function getInitials(name: string | null | undefined): string {

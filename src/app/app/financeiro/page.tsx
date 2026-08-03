@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo, useCallback } from 'react'
+import dynamic from 'next/dynamic'
 import { createClient } from '@/lib/supabase/client'
 import { BarChart3, List, Wallet, TrendingUp, TrendingDown, Clock, Repeat } from 'lucide-react'
 import { format, startOfMonth, endOfMonth, subMonths, addMonths } from 'date-fns'
@@ -10,6 +11,7 @@ import { FinanceCard } from '@/components/finance/FinanceCard'
 import { CreateFinanceDialog } from '@/components/finance/CreateFinanceDialog'
 import { FinancialAnalytics } from '@/components/finance/FinancialAnalyticsLazy'
 import { SubscriptionsPanel } from '@/components/finance/SubscriptionsPanelLazy'
+import { ImportOfxButton } from '@/components/finance/ImportOfxButton'
 import { StatCard } from '@/components/shared/StatCard'
 import { EmptyState } from '@/components/shared/EmptyState'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -19,6 +21,12 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { formatCurrency } from '@/lib/utils'
 import { useAccountType } from '@/components/providers/AccountTypeProvider'
 import type { FinancialEntry, Client, Project } from '@/types'
+
+// Só entra no bundle quando o usuário abre a edição de um lançamento.
+const EditFinanceDialog = dynamic(
+  () => import('@/components/finance/EditFinanceDialog').then((module) => module.EditFinanceDialog),
+  { ssr: false }
+)
 
 export default function FinanceiroPage() {
   const [entries, setEntries] = useState<FinancialEntry[]>([])
@@ -30,6 +38,7 @@ export default function FinanceiroPage() {
   const [analyticsLoading, setAnalyticsLoading] = useState(false)
   const [analyticsError, setAnalyticsError] = useState(false)
   const [currentDate, setCurrentDate] = useState(new Date())
+  const [editEntry, setEditEntry] = useState<FinancialEntry | null>(null)
   const supabase = useMemo(() => createClient(), [])
   const { isFreelancer } = useAccountType()
 
@@ -98,7 +107,12 @@ export default function FinanceiroPage() {
       <PageTitle
         title="Financeiro"
         description="Controle suas receitas e despesas."
-        action={<CreateFinanceDialog clients={clients} projects={projects} onCreated={handleFinancialChange} />}
+        action={
+          <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
+            <ImportOfxButton onImported={handleFinancialChange} />
+            <CreateFinanceDialog clients={clients} projects={projects} onCreated={handleFinancialChange} />
+          </div>
+        }
       />
 
       {/* Month navigator */}
@@ -137,8 +151,13 @@ export default function FinanceiroPage() {
           {loading ? (
             <div className="space-y-2">{Array.from({ length: 5 }).map((_, i) => <Skeleton key={i} className="h-16 w-full" />)}</div>
           ) : entries.length === 0 ? (
-            <EmptyState icon={Wallet} title="Nenhum lançamento neste mês" description="Registre suas receitas e despesas para acompanhar seu financeiro."
-              action={<CreateFinanceDialog clients={clients} projects={projects} onCreated={handleFinancialChange} />}
+            <EmptyState icon={Wallet} title="Nenhum lançamento neste mês" description="Registre manualmente ou importe o extrato OFX do seu banco."
+              action={
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  <CreateFinanceDialog clients={clients} projects={projects} onCreated={handleFinancialChange} />
+                  <ImportOfxButton onImported={handleFinancialChange} />
+                </div>
+              }
             />
           ) : (
             <Tabs defaultValue="todos">
@@ -149,15 +168,15 @@ export default function FinanceiroPage() {
               </TabsList>
 
               <TabsContent value="todos" className="mt-4 space-y-2">
-                {entries.map((entry) => <FinanceCard key={entry.id} entry={entry} onChanged={load} />)}
+                {entries.map((entry) => <FinanceCard key={entry.id} entry={entry} onEdit={setEditEntry} onChanged={load} />)}
               </TabsContent>
               <TabsContent value="receitas" className="mt-4 space-y-2">
                 {incomeEntries.length === 0 ? <EmptyState icon={TrendingUp} title="Nenhuma receita" /> :
-                  incomeEntries.map((entry) => <FinanceCard key={entry.id} entry={entry} onChanged={load} />)}
+                  incomeEntries.map((entry) => <FinanceCard key={entry.id} entry={entry} onEdit={setEditEntry} onChanged={load} />)}
               </TabsContent>
               <TabsContent value="despesas" className="mt-4 space-y-2">
                 {expenseEntries.length === 0 ? <EmptyState icon={TrendingDown} title="Nenhuma despesa" /> :
-                  expenseEntries.map((entry) => <FinanceCard key={entry.id} entry={entry} onChanged={load} />)}
+                  expenseEntries.map((entry) => <FinanceCard key={entry.id} entry={entry} onEdit={setEditEntry} onChanged={load} />)}
               </TabsContent>
             </Tabs>
           )}
@@ -192,6 +211,18 @@ export default function FinanceiroPage() {
           )}
         </TabsContent>
       </Tabs>
+
+      {editEntry && (
+        <EditFinanceDialog
+          key={editEntry.id}
+          entry={editEntry}
+          clients={clients}
+          projects={projects}
+          open
+          onOpenChange={(nextOpen) => !nextOpen && setEditEntry(null)}
+          onSaved={handleFinancialChange}
+        />
+      )}
     </div>
   )
 }
